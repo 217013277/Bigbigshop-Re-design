@@ -9,6 +9,7 @@ class CardAdapter(
     private val books: List<Book>,
     private val clickListener: BookClickListener
     ) : RecyclerView.Adapter<CardViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val from = LayoutInflater.from(parent.context)
         val binding = CardCellBinding.inflate(from, parent, false)

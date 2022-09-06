@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.bigbigshopre_design.databinding.ActivityMainBinding
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,7 +40,7 @@ class Category : Fragment(), BookClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_category, container, false)
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
@@ -49,15 +48,15 @@ class Category : Fragment(), BookClickListener {
 
         populateBooks()
 
-        val fragmentCategoryBinding = this
+        val thisActivity = this
         binding.recycleView.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-            adapter = CardAdapter(bookList, fragmentCategoryBinding)
+            adapter = CardAdapter(bookList, thisActivity)
         }
 
         binding.recycleViewProduct.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext , 3)
-            adapter = CardAdapter(bookList, fragmentCategoryBinding)
+            adapter = CardAdapter(bookList, thisActivity)
         }
 
         return view

@@ -1,7 +1,9 @@
 package com.example.bigbigshopre_design
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.bigbigshopre_design.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -12,6 +14,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bookID = intent.getIntExtra(BOOK_ID_EXTRA, -1)
+        Log.i(TAG, bookID.toString())
         val book = bookFromID(bookID)
         if (book != null) {
             binding.cover.setImageResource(book.cover)
