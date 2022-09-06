@@ -1,5 +1,6 @@
 package com.example.bigbigshopre_design
 
+import android.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,9 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
-        fragmentTransaction.commit()
-
+        fragmentTransaction.replace(R.id.frame_layout,fragment).commit()
 
     }
 }
