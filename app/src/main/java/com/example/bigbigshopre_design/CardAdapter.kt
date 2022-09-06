@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bigbigshopre_design.databinding.CardCellBinding
 
-class CardAdapter(private val books: List<Book>) : RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(
+    private val books: List<Book>,
+    private val clickListener: BookClickListener
+    ) : RecyclerView.Adapter<CardViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val from = LayoutInflater.from(parent.context)
-        val bidng = CardCellBinding.inflate(from, parent, false)
-        return CardViewHolder(bidng)
+        val binding = CardCellBinding.inflate(from, parent, false)
+        return CardViewHolder(binding, clickListener)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
