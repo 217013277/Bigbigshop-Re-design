@@ -49,7 +49,7 @@ class Category : Fragment(), BookClickListener {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        populateBooks()
+        if (bookList.size < 1) populateBooks()
 
         val thisActivity = this
         binding.recycleView.apply {
