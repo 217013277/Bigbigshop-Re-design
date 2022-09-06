@@ -1,7 +1,10 @@
 package com.example.bigbigshopre_design
 
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -84,6 +87,7 @@ class Category : Fragment(), BookClickListener {
 
     override fun onClick(book: Book) {
         val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
+        Log.i(TAG,book.id.toString())
         intent.putExtra(BOOK_ID_EXTRA, book.id)
         startActivity(intent)
     }
