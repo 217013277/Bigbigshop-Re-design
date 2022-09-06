@@ -9,6 +9,7 @@ class CardViewHolder(
     ): RecyclerView.ViewHolder(cardCellBinding.root) {
     fun bindBook(book: Book) {
         cardCellBinding.cover.setImageResource(book.cover)
+        cardCellBinding.position.text = book.id.toString()
         cardCellBinding.title.text = book.title
         cardCellBinding.author.text = book.author
 
