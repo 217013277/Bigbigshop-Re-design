@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/cover"
-                android:src="@drawable/abtm" />
+                android:src="@drawable/mask_for_adult" />
 
             <View
                 android:id="@+id/divider4"

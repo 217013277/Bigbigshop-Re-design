@@ -1,5 +1,6 @@
 package com.example.bigbigshopre_design
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 import com.example.bigbigshopre_design.lists.book.*
@@ -42,6 +44,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var categoryAdapter: CategoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,10 +69,13 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
         val thisActivity = this
         binding.recycleView.isNestedScrollingEnabled = false
-        binding.recycleView.apply {
-            layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-            adapter = CategoryAdapter(categoryList, thisActivity)
-        }
+        categoryAdapter = CategoryAdapter(categoryList, thisActivity)
+        binding.recycleView.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
+        binding.recycleView.adapter = categoryAdapter
+//        binding.recycleView.apply {
+//            layoutManager = GridLayoutManager(activity?.applicationContext , 2)
+//            categoryAdapter = CategoryAdapter(this, categoryList, thisActivity)
+//        }
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
         binding.recycleViewProduct.apply {
@@ -227,11 +234,69 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category13)
     }
 
+    private fun populateCategories_food() {
+        categoryList.clear()
+        val category1 = Category("新鮮食品")
+        categoryList.add(category1)
+        val category2 = Category("急凍食品")
+        categoryList.add(category2)
+        val category3 = Category("冷凍食品")
+        categoryList.add(category3)
+        val category4 = Category("節慶食品")
+        categoryList.add(category4)
+        val category5 = Category("餐飲券")
+        categoryList.add(category5)
+        val category6 = Category("酒精飲料")
+        categoryList.add(category6)
+        val category7 = Category("飲料")
+        categoryList.add(category7)
+        val category8 = Category("海味乾貨")
+        categoryList.add(category8)
+        val category9 = Category("零食甜品")
+        categoryList.add(category9)
+        val category10 = Category("麵類")
+        categoryList.add(category10)
+        val category11 = Category("即食食品")
+        categoryList.add(category11)
+        val category12 = Category("罐頭乾貨")
+        categoryList.add(category12)
+        val category13 = Category("米食油")
+        categoryList.add(category13)
+    }
+
+    private fun populateCategories_skincare_makeup() {
+        categoryList.clear()
+        val category1 = Category("護膚品")
+        categoryList.add(category1)
+        val category2 = Category("美甲護甲")
+        categoryList.add(category2)
+        val category3 = Category("香水")
+        categoryList.add(category3)
+        val category4 = Category("化妝品")
+        categoryList.add(category4)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onClick(category: Category) {
 //        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
 //        Log.i(TAG,category.id.toString())
 //        intent.putExtra(CATEGORY_ID_EXTRA, category.id)
 //        startActivity(intent)
+
+//        if(category.title == "講飲講食") {
+//            populateCategories_skincare_makeup()
+//        }
+        when(category.title) {
+            "講飲講食" -> populateCategories_food()
+            "護膚化妝" -> populateCategories_skincare_makeup()
+            "日尸木" -> populateCategories_skincare_makeup()
+            else -> Log.i(TAG,"nothing select")
+        }
+        categoryAdapter.notifyDataSetChanged()
+
+        binding.breadcrumbTv3.text = category.title
+        binding.breadcrumb3.visibility = View.VISIBLE
+        binding.Header.text = category.title
     }
 
     override fun onClick(product: Product) {
