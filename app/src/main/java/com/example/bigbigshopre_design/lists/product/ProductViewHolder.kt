@@ -8,8 +8,11 @@ class ProductViewHolder(
     private val clickListener: ProductClickListener
     ): RecyclerView.ViewHolder(productCellBinding.root) {
     fun bindCategory(product: Product) {
-//        cardCellBinding.position.text = category.id.toString()
-        productCellBinding.title.text = product.title
+        productCellBinding.cover.setImageResource(product.cover)
+        productCellBinding.brand.text = product.brand
+        productCellBinding.name.text = product.name
+        productCellBinding.price.text = product.price
+        productCellBinding.original.text = product.original
 
         productCellBinding.cardView.setOnClickListener{
             clickListener.onClick(product)

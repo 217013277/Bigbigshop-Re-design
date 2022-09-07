@@ -6,9 +6,10 @@ val PRODUCT_ID_EXTRA = "productExtra"
 
 class Product (
     var cover: Int,
-    var author: String,
-    var title: String,
-    var description: String,
+    var brand: String,
+    var name: String,
+    var price: String,
+    var original: String,
     val id: Int? = productList.size
 )
 
