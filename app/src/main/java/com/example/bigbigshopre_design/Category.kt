@@ -2,18 +2,15 @@ package com.example.bigbigshopre_design
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 import com.example.bigbigshopre_design.lists.book.*
-import com.example.bigbigshopre_design.lists.category.CATEGORY_ID_EXTRA
 import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.category.CategoryAdapter
 import com.example.bigbigshopre_design.lists.category.CategoryClickListener
@@ -45,6 +42,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     private val binding get() = _binding!!
 
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,24 +61,30 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        populateBooks()
         populateCategories()
         populateProducts()
 
-        val thisActivity = this
-        binding.recycleView.isNestedScrollingEnabled = false
-        categoryAdapter = CategoryAdapter(categoryList, thisActivity)
-        binding.recycleView.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        binding.recycleView.adapter = categoryAdapter
-//        binding.recycleView.apply {
-//            layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-//            categoryAdapter = CategoryAdapter(this, categoryList, thisActivity)
-//        }
+        binding.recyclerViewCategory.isNestedScrollingEnabled = false
+        binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
+        categoryAdapter = CategoryAdapter(categoryList, this)
+        binding.recyclerViewCategory.adapter = categoryAdapter
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
-        binding.recycleViewProduct.apply {
-            layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-            adapter = ProductAdapter(productList, thisActivity)
+        binding.recycleViewProduct.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
+        productAdapter = ProductAdapter(productList, this)
+        binding.recycleViewProduct.adapter = productAdapter
+
+        binding.breadcrumbTv2.setOnClickListener {
+            binding.Header.text = "商品分類"
+            binding.breadcrumb3.visibility = View.GONE
+            binding.breadcrumb4.visibility = View.GONE
+            binding.breadcrumb5.visibility = View.GONE
+            binding.breadcrumb6.visibility = View.GONE
+            binding.breadcrumb7.visibility = View.GONE
+            populateCategories()
+            populateProducts()
+            categoryAdapter.notifyDataSetChanged()
+            productAdapter.notifyDataSetChanged()
         }
 
         return view
@@ -234,7 +238,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category13)
     }
 
-    private fun populateCategories_food() {
+    private fun populateCategories_3_food() {
         categoryList.clear()
         val category1 = Category("新鮮食品")
         categoryList.add(category1)
@@ -264,7 +268,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category13)
     }
 
-    private fun populateCategories_skincare_makeup() {
+    private fun populateCategories_3_skincare_makeup() {
         categoryList.clear()
         val category1 = Category("護膚品")
         categoryList.add(category1)
@@ -287,15 +291,23 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 //            populateCategories_skincare_makeup()
 //        }
         when(category.title) {
-            "講飲講食" -> populateCategories_food()
-            "護膚化妝" -> populateCategories_skincare_makeup()
-            "日尸木" -> populateCategories_skincare_makeup()
+            "講飲講食" -> {
+                populateCategories_3_food()
+                binding.breadcrumbTv3.text = category.title
+                binding.breadcrumb3.visibility = View.VISIBLE
+                productList.clear()
+            }
+            "護膚化妝" -> {
+                populateCategories_3_skincare_makeup()
+                binding.breadcrumbTv3.text = category.title
+                binding.breadcrumb3.visibility = View.VISIBLE
+            }
+            "日尸木" -> populateCategories_3_skincare_makeup()
             else -> Log.i(TAG,"nothing select")
         }
         categoryAdapter.notifyDataSetChanged()
+        productAdapter.notifyDataSetChanged()
 
-        binding.breadcrumbTv3.text = category.title
-        binding.breadcrumb3.visibility = View.VISIBLE
         binding.Header.text = category.title
     }
 

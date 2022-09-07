@@ -194,7 +194,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleView"
+                android:id="@+id/recyclerViewCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -219,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="商品分類"
+                    android:text="排序"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -235,7 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="商品分類"
+                android:text="過濾"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
