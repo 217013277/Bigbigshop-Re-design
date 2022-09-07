@@ -2,7 +2,6 @@ package com.example.bigbigshopre_design
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
+import com.example.bigbigshopre_design.lists.book.*
+import com.example.bigbigshopre_design.lists.category.CATEGORY_ID_EXTRA
+import com.example.bigbigshopre_design.lists.category.Category
+import com.example.bigbigshopre_design.lists.category.CategoryAdapter
+import com.example.bigbigshopre_design.lists.category.CategoryClickListener
+import com.example.bigbigshopre_design.lists.category.categoryList
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Category.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Category : Fragment(), BookClickListener {
+class Category : Fragment(), CategoryClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -49,18 +55,21 @@ class Category : Fragment(), BookClickListener {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        if (bookList.size < 1) populateBooks()
+        populateBooks()
+        populateCategories()
 
         val thisActivity = this
+        binding.recycleView.isNestedScrollingEnabled = false
         binding.recycleView.apply {
             layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-            adapter = CardAdapter(bookList, thisActivity)
+            adapter = CategoryAdapter(categoryList, thisActivity)
         }
 
-        binding.recycleViewProduct.apply {
-            layoutManager = GridLayoutManager(activity?.applicationContext , 3)
-            adapter = CardAdapter(bookList, thisActivity)
-        }
+//        binding.recycleViewProduct.isNestedScrollingEnabled = false
+//        binding.recycleViewProduct.apply {
+//            layoutManager = GridLayoutManager(activity?.applicationContext , 3)
+//            adapter = BookAdapter(bookList, thisActivity)
+//        }
 
         return view
     }
@@ -85,14 +94,15 @@ class Category : Fragment(), BookClickListener {
             }
     }
 
-    override fun onClick(book: Book) {
-        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
-        Log.i(TAG,book.id.toString())
-        intent.putExtra(BOOK_ID_EXTRA, book.id)
-        startActivity(intent)
+    override fun onClick(category: Category) {
+//        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
+//        Log.i(TAG,category.id.toString())
+//        intent.putExtra(CATEGORY_ID_EXTRA, category.id)
+//        startActivity(intent)
     }
 
     private fun populateBooks() {
+        bookList.clear()
         val book1 = Book(
             R.drawable.abtm,
             "Victoria Devine",
@@ -142,5 +152,35 @@ class Category : Fragment(), BookClickListener {
             "Philomena McCarthy has defied the odds and become a promising young officer with the Metropolitan Police despite being the daughter of a notorious London gangster. Called to the scene of a domestic assault one day, she rescues a bloodied young woman, Tempe Brown, the mistress of a decorated detective. The incident is hushed up, but Phil has unwittingly made a dangerous enemy with powerful friends.\n"
         )
         bookList.add(book7)
+    }
+
+    private fun populateCategories() {
+        categoryList.clear()
+        val category1 = Category("講飲講食")
+        categoryList.add(category1)
+        val category2 = Category("護膚化妝")
+        categoryList.add(category2)
+        val category3 = Category("電子數碼")
+        categoryList.add(category3)
+        val category4 = Category("品味家居")
+        categoryList.add(category4)
+        val category5 = Category("個人護理")
+        categoryList.add(category5)
+        val category6 = Category("服裝配飾")
+        categoryList.add(category6)
+        val category7 = Category("保建養生")
+        categoryList.add(category7)
+        val category8 = Category("炊藝樂廚")
+        categoryList.add(category8)
+        val category9 = Category("母嬰育兒")
+        categoryList.add(category9)
+        val category10 = Category("玩具圖書")
+        categoryList.add(category10)
+        val category11 = Category("旅遊運動")
+        categoryList.add(category11)
+        val category12 = Category("文具精品")
+        categoryList.add(category12)
+        val category13 = Category("寵物用品")
+        categoryList.add(category13)
     }
 }

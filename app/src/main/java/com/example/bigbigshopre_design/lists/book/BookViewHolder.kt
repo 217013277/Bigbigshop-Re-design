@@ -1,10 +1,10 @@
-package com.example.bigbigshopre_design
+package com.example.bigbigshopre_design.lists.book
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bigbigshopre_design.databinding.CardCellBinding
+import com.example.bigbigshopre_design.databinding.BookCellBinding
 
-class CardViewHolder(
-    private val cardCellBinding: CardCellBinding,
+class BookViewHolder(
+    private val cardCellBinding: BookCellBinding,
     private val clickListener: BookClickListener
     ): RecyclerView.ViewHolder(cardCellBinding.root) {
     fun bindBook(book: Book) {

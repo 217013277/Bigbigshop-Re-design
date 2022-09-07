@@ -6,4 +6,6 @@
     <string name="title_place_holder">Title Place Holder</string>
     <string name="author_place_holder">Author Place Holder</string>
     <string name="favourite_page">Favourite page</string>
+    <string name="main_page">主頁</string>
+    <string name="category">商品分類</string>
 </resources>

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.bigbigshopre_design.databinding.ActivityDetailBinding
+import com.example.bigbigshopre_design.lists.book.BOOK_ID_EXTRA
+import com.example.bigbigshopre_design.lists.book.Book
+import com.example.bigbigshopre_design.lists.book.bookList
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding

@@ -1,8 +1,8 @@
-package com.example.bigbigshopre_design
+package com.example.bigbigshopre_design.lists.book
 
 var bookList = mutableListOf<Book>()
 
-val BOOK_ID_EXTRA = "bookExtra"
+const val BOOK_ID_EXTRA = "bookExtra"
 
 class Book (
     var cover: Int,
