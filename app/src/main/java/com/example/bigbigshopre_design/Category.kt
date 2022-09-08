@@ -62,7 +62,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         val view = binding.root
 
         populateCategories()
-        populateProducts()
+        populateProducts0()
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
@@ -82,9 +82,44 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
             populateCategories()
-            populateProducts()
+            populateProducts0()
             categoryAdapter.notifyDataSetChanged()
             productAdapter.notifyDataSetChanged()
+        }
+
+        binding.breadcrumbTv3.setOnClickListener {
+            binding.Header.text = "個人護理"
+            binding.breadcrumb4.visibility = View.GONE
+            binding.breadcrumb5.visibility = View.GONE
+            binding.breadcrumb6.visibility = View.GONE
+            binding.breadcrumb7.visibility = View.GONE
+            populateCategories_3_personal_care()
+            populateProducts1()
+            categoryAdapter.notifyDataSetChanged()
+            productAdapter.notifyDataSetChanged()
+        }
+
+        binding.breadcrumbTv4.setOnClickListener {
+            binding.Header.text = "身體護理"
+            binding.breadcrumb5.visibility = View.GONE
+            binding.breadcrumb6.visibility = View.GONE
+            binding.breadcrumb7.visibility = View.GONE
+            populateCategories_4_body_care()
+            populateProducts2()
+            categoryAdapter.notifyDataSetChanged()
+            productAdapter.notifyDataSetChanged()
+        }
+
+        binding.breadcrumbTv5.setOnClickListener {
+            binding.Header.text = "口罩及配件"
+            binding.breadcrumb6.visibility = View.GONE
+            binding.breadcrumb7.visibility = View.GONE
+            populateCategories_5_mask()
+            populateProducts3()
+            productList = productList.filter { it.name == "成人口罩" } as MutableList<Product>
+            categoryAdapter.notifyDataSetChanged()
+            productAdapter.notifyDataSetChanged()
+
         }
 
         return view
@@ -110,61 +145,11 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             }
     }
 
-    private fun populateBooks() {
-        bookList.clear()
-        val book1 = Book(
-            R.drawable.abtm,
-            "Victoria Devine",
-            "AGELESS BODY, TIMELESS MIND",
-            "The definitive text on the healing powers of the mind/body connection. In Ageless Body, Timeless Mind, world-renowned pioneer of integrative medicine Deepak Chopra goes beyond ancient mind/body wisdom and current anti-ageing research to show that you do not have to grow old. With the passage of time, you can retain your physical vitality, creativity, memory and self-esteem. Based on the theories of Ayurveda and groundbreaking research, Chopra reveals how we can use our innate capacity for balance to direct the way our bodies metabolize time and achieve our unbounded potential."
-        )
-        bookList.add(book1)
-        val book2 = Book(
-            R.drawable.tmom,
-            "Amanda Lohrey",
-            "THE MIRACLE OF MINDFULNESS",
-            "This is the definitive book on mindfulness from the beloved Zen master and Nobel Peace Prize nominee Thich Nhat Hanh. With his signature clarity and warmth, he shares practical exercises and anecdotes to help us arrive at greater self-understanding and peacefulness, whether we are beginners or advanced students.\n" + "\n" + "Beautifully written, The Miracle of Mindfulness is the essential guide to welcoming presence in your life and truly living in the moment from the father of mindfulness.\n"
-        )
-        bookList.add(book2)
-        val book3 = Book(
-            R.drawable.trlt,
-            "M. Scott Peck",
-            "THE ROAD LESS TRAVELLED",
-            "A timeless classic in personal development, The Road Less Travelled is a landmark work that has inspired millions. Drawing on the experiences of his career as a psychiatrist, Scott Peck combines scientific and spiritual views to guide us through the difficult, painful times in life by showing us how to confront our problems through the key principles of discipline, love and grace.Teaching us how to distinguish dependency from love, how to become a more sensitive parent and how to connect with your true self, this incredible book is the key to accepting and overcoming life's challenges and achieving a higher level of self-understanding."
-        )
-        bookList.add(book3)
-        val book4 = Book(
-            R.drawable.iewu,
-            "Colleen Hoover",
-            "IT ENDS WITH US",
-            "'A brave and heartbreaking novel that digs its claws into you and doesn't let go, long after you've finished it' Anna Todd, author of the After series\n" + "\n" + "'A glorious and touching read, a forever keeper' USA Today\n" + "\n" + "'Will break your heart while filling you with hope' Sarah Pekkanen, Perfect Neighbors\n",
-        )
-        bookList.add(book4)
-        val book5 = Book(
-            R.drawable.ips,
-            "Ross Coulthart",
-            "IN PLAIN SIGHT",
-            "Investigative journalist Ross Coulthart has been intrigued by UFOs since mysterious glowing lights were reported near New Zealand's Kaikoura mountains when he was a teenager. The 1978 sighting is just one of thousands since the 1940s, and yet research into UFOs is still seen as the realm of crackpots and conspiracy theorists."
-        )
-        bookList.add(book5)
-        val book6 = Book(
-            R.drawable.ttmc,
-            "Richard Osman",
-            "THE THURSDAY MURDER CLUB",
-            "In a peaceful retirement village, four unlikely friends meet up once a week to investigate unsolved murders.\n" + "\n" + "But when a brutal killing takes place on their very doorstep, the Thursday Murder Club find themselves in the middle of their first live case.\n" + "\n" + "Elizabeth, Joyce, Ibrahim and Ron might be pushing eighty but they still have a few tricks up their sleeves.",
-        )
-        bookList.add(book6)
-        val book7 = Book(
-            R.drawable.wyam,
-            "Michael Robotham",
-            "WHEN YOU ARE MINE",
-            "Philomena McCarthy has defied the odds and become a promising young officer with the Metropolitan Police despite being the daughter of a notorious London gangster. Called to the scene of a domestic assault one day, she rescues a bloodied young woman, Tempe Brown, the mistress of a decorated detective. The incident is hushed up, but Phil has unwittingly made a dangerous enemy with powerful friends.\n"
-        )
-        bookList.add(book7)
-    }
+    private fun populateProducts0() { productList.clear() }
 
-    private fun populateProducts()
+    private fun populateProducts1()
     {
+        productList.clear()
         val products1 = Product(
             R.drawable.shaver,
             "大吉大利",
@@ -172,7 +157,6 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             "HK$199",
             "HK399"
         )
-        productList.add(products1)
         productList.add(products1)
 
         val products2 = Product(
@@ -183,7 +167,6 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             "HK90"
         )
         productList.add(products2)
-        productList.add(products2)
 
         val products3 = Product(
             R.drawable.mask_for_kid,
@@ -192,9 +175,6 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             "HK$88",
             "HK123"
         )
-        productList.add(products3)
-        productList.add(products3)
-        productList.add(products3)
         productList.add(products3)
 
         val products4 = Product(
@@ -205,8 +185,76 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             "HK188"
         )
         productList.add(products4)
-
     }
+
+    private fun populateProducts2()
+    {
+        productList.clear()
+        val products2 = Product(
+            R.drawable.shampoo,
+            "好乾淨",
+            "洗頭水",
+            "HK$55",
+            "HK90"
+        )
+        productList.add(products2)
+
+        val products3 = Product(
+            R.drawable.mask_for_kid,
+            "細口仔",
+            "兒童口罩",
+            "HK$88",
+            "HK123"
+        )
+        productList.add(products3)
+
+        val products4 = Product(
+            R.drawable.mask_for_adult,
+            "大口仔",
+            "成人口罩",
+            "HK$128",
+            "HK188"
+        )
+        productList.add(products4)
+    }
+
+    private fun populateProducts3()
+    {
+        productList.clear()
+
+        val products3 = Product(
+            R.drawable.mask_for_kid,
+            "細口仔",
+            "兒童口罩",
+            "HK$88",
+            "HK123"
+        )
+        productList.add(products3)
+
+        val products4 = Product(
+            R.drawable.mask_for_adult,
+            "大口仔",
+            "成人口罩",
+            "HK$128",
+            "HK188"
+        )
+        productList.add(products4)
+    }
+
+    private fun populateProducts4()
+    {
+        productList.clear()
+
+        val products4 = Product(
+            R.drawable.mask_for_adult,
+            "大口仔",
+            "成人口罩",
+            "HK$128",
+            "HK188"
+        )
+        productList.add(products4)
+    }
+
 
     private fun populateCategories() {
         categoryList.clear()
@@ -280,18 +328,64 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category4)
     }
 
+    private fun populateCategories_3_personal_care() {
+        categoryList.clear()
+        val category1 = Category("身體護理")
+        categoryList.add(category1)
+        val category2 = Category("頭髮護理")
+        categoryList.add(category2)
+        val category3 = Category("口腔護理")
+        categoryList.add(category3)
+        val category4 = Category("手部護理")
+        categoryList.add(category4)
+        val category5 = Category("足部護理")
+        categoryList.add(category5)
+        val category6 = Category("男士剃鬚")
+        categoryList.add(category6)
+        val category7 = Category("女士衛生")
+        categoryList.add(category7)
+        val category8 = Category("長者護理")
+        categoryList.add(category8)
+        val category9 = Category("成人用品")
+        categoryList.add(category9)
+    }
+
+    private fun populateCategories_4_body_care() {
+        categoryList.clear()
+        val category1 = Category("口罩及配件")
+        categoryList.add(category1)
+        val category2 = Category("沐浴露")
+        categoryList.add(category2)
+        val category3 = Category("香皂")
+        categoryList.add(category3)
+        val category4 = Category("浴鹽/泡泡浴")
+        categoryList.add(category4)
+        val category5 = Category("磨砂/去角質工具")
+        categoryList.add(category5)
+        val category6 = Category("止汗香氛/爽身粉")
+        categoryList.add(category6)
+        val category7 = Category("潔膚棉/棉花棒")
+        categoryList.add(category7)
+        val category8 = Category("濕紙巾")
+        categoryList.add(category8)
+    }
+
+    private fun populateCategories_5_mask() {
+        categoryList.clear()
+        val category1 = Category("成人口罩")
+        categoryList.add(category1)
+        val category2 = Category("兒童口罩")
+        categoryList.add(category2)
+    }
+
+    private fun populateCategories_6_mask_adult() {
+        categoryList.clear()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onClick(category: Category) {
-//        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
-//        Log.i(TAG,category.id.toString())
-//        intent.putExtra(CATEGORY_ID_EXTRA, category.id)
-//        startActivity(intent)
-
-//        if(category.title == "講飲講食") {
-//            populateCategories_skincare_makeup()
-//        }
         when(category.title) {
-            "講飲講食" -> {
+            /*"講飲講食" -> {
                 populateCategories_3_food()
                 binding.breadcrumbTv3.text = category.title
                 binding.breadcrumb3.visibility = View.VISIBLE
@@ -301,8 +395,31 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
                 populateCategories_3_skincare_makeup()
                 binding.breadcrumbTv3.text = category.title
                 binding.breadcrumb3.visibility = View.VISIBLE
+            }*/
+            "個人護理" -> {
+                populateCategories_3_personal_care()
+                populateProducts1()
+                binding.breadcrumbTv3.text = category.title
+                binding.breadcrumb3.visibility = View.VISIBLE
             }
-            "日尸木" -> populateCategories_3_skincare_makeup()
+            "身體護理" -> {
+                populateCategories_4_body_care()
+                populateProducts2()
+                binding.breadcrumbTv4.text = category.title
+                binding.breadcrumb4.visibility = View.VISIBLE
+            }
+            "口罩及配件" -> {
+                populateCategories_5_mask()
+                populateProducts3()
+                binding.breadcrumbTv5.text = category.title
+                binding.breadcrumb5.visibility = View.VISIBLE
+            }
+            "成人口罩" -> {
+                populateCategories_6_mask_adult()
+                populateProducts4()
+                binding.breadcrumbTv6.text = category.title
+                binding.breadcrumb6.visibility = View.VISIBLE
+            }
             else -> Log.i(TAG,"nothing select")
         }
         categoryAdapter.notifyDataSetChanged()
