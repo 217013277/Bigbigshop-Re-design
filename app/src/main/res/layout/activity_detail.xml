@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,41 +13,53 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/mask_for_adult"
         android:adjustViewBounds="true"
         android:contentDescription="@string/cover"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/productDetailBrand"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/title_place_holder"
+        android:text="Brand Place Holder"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:lines="1" />
+
+    <TextView
+        android:id="@+id/productDetailName"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Name place holder"
+        android:textColor="@color/black"
+        android:textSize="32sp"
         android:lines="2"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/author"
+        android:id="@+id/productDetailPrice"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/author_place_holder"
+        android:text="price place holder"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:lines="1" />
+        android:textSize="24sp" />
+
+
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/productDetailOriginal"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/author_place_holder"
+        android:text="original price place holder"
         android:textColor="@color/black"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>

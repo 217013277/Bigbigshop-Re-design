@@ -2,6 +2,7 @@ package com.example.bigbigshopre_design
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,10 +15,7 @@ import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.category.CategoryAdapter
 import com.example.bigbigshopre_design.lists.category.CategoryClickListener
 import com.example.bigbigshopre_design.lists.category.categoryList
-import com.example.bigbigshopre_design.lists.product.Product
-import com.example.bigbigshopre_design.lists.product.ProductAdapter
-import com.example.bigbigshopre_design.lists.product.ProductClickListener
-import com.example.bigbigshopre_design.lists.product.productList
+import com.example.bigbigshopre_design.lists.product.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -375,6 +373,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     }
 
     override fun onClick(product: Product) {
-        TODO("Not yet implemented")
+        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
+        intent.putExtra(PRODUCT_ID_EXTRA, product.id)
+        startActivity(intent)
     }
 }

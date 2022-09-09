@@ -21,9 +21,10 @@ class DetailActivity : AppCompatActivity() {
         val product = productFromID(productId)
         if (product != null) {
             binding.cover.setImageResource(product.cover)
-            binding.title.text = product.name
-            binding.author.text = product.brand
-            binding.description.text = product.price
+            binding.productDetailBrand.text = product.brand
+            binding.productDetailName.text = product.name
+            binding.productDetailPrice.text = product.price
+            binding.productDetailOriginal.text = product.original
         }
     }
 
