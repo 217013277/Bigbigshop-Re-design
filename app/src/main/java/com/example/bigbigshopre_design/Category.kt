@@ -62,7 +62,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         val view = binding.root
 
         populateCategories()
-        populateProducts0()
+        populateProducts1()
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
@@ -74,7 +74,9 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         productAdapter = ProductAdapter(productList, this)
         binding.recycleViewProduct.adapter = productAdapter
 
-        binding.breadcrumbTv2.setOnClickListener {
+        binding.productLists.visibility = View.GONE
+
+        binding.breadcrumbTv1.setOnClickListener {
             binding.Header.text = "商品分類"
             binding.breadcrumb3.visibility = View.GONE
             binding.breadcrumb4.visibility = View.GONE
@@ -82,9 +84,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
             populateCategories()
-            populateProducts0()
             categoryAdapter.notifyDataSetChanged()
-            productAdapter.notifyDataSetChanged()
+            binding.productLists.visibility = View.GONE
         }
 
         binding.breadcrumbTv3.setOnClickListener {
@@ -93,10 +94,11 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb5.visibility = View.GONE
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories_3_personal_care()
-            populateProducts1()
+            populateCategories3PersonalCare()
             categoryAdapter.notifyDataSetChanged()
+            populateProducts1()
             productAdapter.notifyDataSetChanged()
+            binding.productLists.visibility = View.VISIBLE
         }
 
         binding.breadcrumbTv4.setOnClickListener {
@@ -104,22 +106,22 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb5.visibility = View.GONE
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories_4_body_care()
-            populateProducts2()
+            populateCategories4BodyCare()
             categoryAdapter.notifyDataSetChanged()
+            populateProducts2()
             productAdapter.notifyDataSetChanged()
+            binding.productLists.visibility = View.VISIBLE
         }
 
         binding.breadcrumbTv5.setOnClickListener {
             binding.Header.text = "口罩及配件"
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories_5_mask()
-            populateProducts3()
-            productList = productList.filter { it.name == "成人口罩" } as MutableList<Product>
+            populateCategories5Mask()
             categoryAdapter.notifyDataSetChanged()
+            populateProducts3()
             productAdapter.notifyDataSetChanged()
-
+            binding.productLists.visibility = View.VISIBLE
         }
 
         return view
@@ -150,71 +152,30 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     private fun populateProducts1()
     {
         productList.clear()
-        val products1 = Product(
-            R.drawable.shaver,
-            "大吉大利",
-            "男士剃鬚刀",
-            "HK$199",
-            "HK399"
-        )
+        val products1 = Product(R.drawable.shaver, "大吉大利", "男士剃鬚刀", "HK$199", "HK399")
         productList.add(products1)
 
-        val products2 = Product(
-            R.drawable.shampoo,
-            "好乾淨",
-            "洗頭水",
-            "HK$55",
-            "HK90"
-        )
+        val products2 = Product(R.drawable.shampoo, "好乾淨", "洗頭水", "HK$55", "HK90")
         productList.add(products2)
 
-        val products3 = Product(
-            R.drawable.mask_for_kid,
-            "細口仔",
-            "兒童口罩",
-            "HK$88",
-            "HK123"
-        )
+        val products3 = Product(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123")
         productList.add(products3)
 
-        val products4 = Product(
-            R.drawable.mask_for_adult,
-            "大口仔",
-            "成人口罩",
-            "HK$128",
-            "HK188"
-        )
+        val products4 = Product(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188")
         productList.add(products4)
     }
 
     private fun populateProducts2()
     {
         productList.clear()
-        val products2 = Product(
-            R.drawable.shampoo,
-            "好乾淨",
-            "洗頭水",
-            "HK$55",
-            "HK90"
-        )
+
+        val products2 = Product(R.drawable.shampoo, "好乾淨", "洗頭水", "HK$55", "HK90")
         productList.add(products2)
 
-        val products3 = Product(
-            R.drawable.mask_for_kid,
-            "細口仔",
-            "兒童口罩",
-            "HK$88",
-            "HK123"
-        )
+        val products3 = Product(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123")
         productList.add(products3)
 
-        val products4 = Product(
-            R.drawable.mask_for_adult,
-            "大口仔",
-            "成人口罩",
-            "HK$128",
-            "HK188"
-        )
+        val products4 = Product(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188")
         productList.add(products4)
     }
 
@@ -222,22 +183,10 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     {
         productList.clear()
 
-        val products3 = Product(
-            R.drawable.mask_for_kid,
-            "細口仔",
-            "兒童口罩",
-            "HK$88",
-            "HK123"
-        )
+        val products3 = Product(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123")
         productList.add(products3)
 
-        val products4 = Product(
-            R.drawable.mask_for_adult,
-            "大口仔",
-            "成人口罩",
-            "HK$128",
-            "HK188"
-        )
+        val products4 = Product(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188")
         productList.add(products4)
     }
 
@@ -245,14 +194,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     {
         productList.clear()
 
-        val products4 = Product(
-            R.drawable.mask_for_adult,
-            "大口仔",
-            "成人口罩",
-            "HK$128",
-            "HK188"
-        )
-        productList.add(products4)
+        val products8 = Product(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188")
+        productList.add(products8)
     }
 
 
@@ -286,7 +229,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category13)
     }
 
-    private fun populateCategories_3_food() {
+    private fun populateCategories3Food() {
         categoryList.clear()
         val category1 = Category("新鮮食品")
         categoryList.add(category1)
@@ -316,7 +259,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category13)
     }
 
-    private fun populateCategories_3_skincare_makeup() {
+    private fun populateCategories3SkincareMakeup() {
         categoryList.clear()
         val category1 = Category("護膚品")
         categoryList.add(category1)
@@ -328,7 +271,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category4)
     }
 
-    private fun populateCategories_3_personal_care() {
+    private fun populateCategories3PersonalCare() {
         categoryList.clear()
         val category1 = Category("身體護理")
         categoryList.add(category1)
@@ -350,7 +293,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category9)
     }
 
-    private fun populateCategories_4_body_care() {
+    private fun populateCategories4BodyCare() {
         categoryList.clear()
         val category1 = Category("口罩及配件")
         categoryList.add(category1)
@@ -370,7 +313,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category8)
     }
 
-    private fun populateCategories_5_mask() {
+    private fun populateCategories5Mask() {
         categoryList.clear()
         val category1 = Category("成人口罩")
         categoryList.add(category1)
@@ -378,7 +321,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.add(category2)
     }
 
-    private fun populateCategories_6_mask_adult() {
+    private fun populateCategories6MaskAdult() {
         categoryList.clear()
     }
 
@@ -397,28 +340,32 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
                 binding.breadcrumb3.visibility = View.VISIBLE
             }*/
             "個人護理" -> {
-                populateCategories_3_personal_care()
+                populateCategories3PersonalCare()
                 populateProducts1()
                 binding.breadcrumbTv3.text = category.title
                 binding.breadcrumb3.visibility = View.VISIBLE
+                binding.productLists.visibility = View.VISIBLE
             }
             "身體護理" -> {
-                populateCategories_4_body_care()
+                populateCategories4BodyCare()
                 populateProducts2()
                 binding.breadcrumbTv4.text = category.title
                 binding.breadcrumb4.visibility = View.VISIBLE
+                binding.productLists.visibility = View.VISIBLE
             }
             "口罩及配件" -> {
-                populateCategories_5_mask()
+                populateCategories5Mask()
                 populateProducts3()
                 binding.breadcrumbTv5.text = category.title
                 binding.breadcrumb5.visibility = View.VISIBLE
+                binding.productLists.visibility = View.VISIBLE
             }
             "成人口罩" -> {
-                populateCategories_6_mask_adult()
+                populateCategories6MaskAdult()
                 populateProducts4()
                 binding.breadcrumbTv6.text = category.title
                 binding.breadcrumb6.visibility = View.VISIBLE
+                binding.productLists.visibility = View.VISIBLE
             }
             else -> Log.i(TAG,"nothing select")
         }
