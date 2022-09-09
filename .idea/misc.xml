@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/card_cell.xml" value="0.3307291666666667" />
         <entry key="app/src/main/res/layout/category_cell.xml" value="0.27708333333333335" />
         <entry key="app/src/main/res/layout/circle_text.xml" value="0.2760416666666667" />
-        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33177083333333335" />
