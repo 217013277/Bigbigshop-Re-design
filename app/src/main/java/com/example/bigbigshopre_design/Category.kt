@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
-import com.example.bigbigshopre_design.lists.book.*
 import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.category.CategoryAdapter
 import com.example.bigbigshopre_design.lists.category.CategoryClickListener

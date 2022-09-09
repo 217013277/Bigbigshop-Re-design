@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.bigbigshopre_design.databinding.ActivityDetailBinding
-import com.example.bigbigshopre_design.lists.book.BOOK_ID_EXTRA
-import com.example.bigbigshopre_design.lists.book.Book
-import com.example.bigbigshopre_design.lists.book.bookList
+import com.example.bigbigshopre_design.lists.product.PRODUCT_ID_EXTRA
+import com.example.bigbigshopre_design.lists.product.Product
+import com.example.bigbigshopre_design.lists.product.productList
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -16,20 +16,20 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bookID = intent.getIntExtra(BOOK_ID_EXTRA, -1)
-        Log.i(TAG, bookID.toString())
-        val book = bookFromID(bookID)
-        if (book != null) {
-            binding.cover.setImageResource(book.cover)
-            binding.title.text = book.title
-            binding.author.text = book.author
-            binding.description.text = book.description
+        val productId = intent.getIntExtra(PRODUCT_ID_EXTRA, -1)
+        Log.i(TAG, productId.toString())
+        val product = productFromID(productId)
+        if (product != null) {
+            binding.cover.setImageResource(product.cover)
+            binding.title.text = product.name
+            binding.author.text = product.brand
+            binding.description.text = product.price
         }
     }
 
-    private fun bookFromID(bookID: Int): Book? {
-        for (book in bookList) {
-            if (book.id == bookID) return book
+    private fun productFromID(productId: Int): Product? {
+        for (product in productList) {
+            if (product.id == productId) return product
         }
         return null
     }
