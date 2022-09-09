@@ -229,9 +229,10 @@
 
                         <CheckBox
                             android:id="@+id/checkBox"
-                            android:layout_weight="1"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/orange_main" />
 
                         <ImageView
                             android:layout_weight="3"
@@ -724,7 +725,9 @@
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="20dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/orange_main"
+                android:checked="false" />
 
             <TextView
                 android:layout_width="wrap_content"
