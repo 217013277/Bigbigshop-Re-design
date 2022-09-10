@@ -5,55 +5,75 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bigbigshopre_design.databinding.FragmentCartBinding
+import com.example.bigbigshopre_design.lists.cartProduct.CartProduct
+import com.example.bigbigshopre_design.lists.cartProduct.CartProductAdapter
+import com.example.bigbigshopre_design.lists.cartProduct.CartProductClickListener
+import com.example.bigbigshopre_design.lists.cartProduct.cartProductList
 
 /**
  * A simple [Fragment] subclass.
  * Use the [Cart.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Cart : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Cart : Fragment(), CartProductClickListener {
+    private var _binding: FragmentCartBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+
+    private lateinit var cartProductAdapter: CartProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+    ): View {
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        populateProducts()
+
+        binding.recyclerViewCartProduct.isNestedScrollingEnabled = false
+        binding.recyclerViewCartProduct.layoutManager = LinearLayoutManager(activity?.applicationContext)
+        cartProductAdapter = CartProductAdapter(cartProductList, this)
+        binding.recyclerViewCartProduct.adapter = cartProductAdapter
+
+        binding.selectAll.setOnClickListener {
+
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Cart.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Cart().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun populateProducts()
+    {
+        cartProductList.clear()
+        val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123",1)
+        cartProductList.add(products1)
+
+        val products2 = CartProduct(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188", 1)
+        cartProductList.add(products2)
     }
+
+    override fun onClick(cartProduct: CartProduct) {
+    }
+
+    override fun onSelect(id: Int) {
+        cartProductList[id].isCheck = !cartProductList[id].isCheck
+        cartProductAdapter.notifyItemChanged(id)
+    }
+
+    override fun onDelete(id: Int) {
+        cartProductList.removeAt(id)
+        cartProductAdapter.notifyItemRemoved(id)
+    }
+
 }

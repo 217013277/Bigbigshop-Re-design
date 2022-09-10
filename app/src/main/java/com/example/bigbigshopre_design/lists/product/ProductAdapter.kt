@@ -3,11 +3,7 @@ package com.example.bigbigshopre_design.lists.product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bigbigshopre_design.databinding.CategoryCellBinding
 import com.example.bigbigshopre_design.databinding.ProductCellBinding
-import com.example.bigbigshopre_design.lists.category.Category
-import com.example.bigbigshopre_design.lists.category.CategoryClickListener
-import com.example.bigbigshopre_design.lists.category.CategoryViewHolder
 
 
 class ProductAdapter(
@@ -21,7 +17,7 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bindCategory(products[position])
+        holder.bindProduct(products[position])
     }
 
     override fun getItemCount(): Int = products.size
