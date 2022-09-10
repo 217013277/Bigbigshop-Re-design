@@ -1,9 +1,7 @@
 package com.example.bigbigshopre_design
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -19,11 +17,6 @@ import com.example.bigbigshopre_design.lists.cartProduct.CartProductAdapter
 import com.example.bigbigshopre_design.lists.cartProduct.CartProductClickListener
 import com.example.bigbigshopre_design.lists.cartProduct.cartProductList
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Cart.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Cart : Fragment(), CartProductClickListener {
     private var _binding: FragmentCartBinding? = null
     // This property is only valid between onCreateView and
@@ -32,11 +25,6 @@ class Cart : Fragment(), CartProductClickListener {
     private lateinit var cartProductAdapter: CartProductAdapter
 
     private var cartSum: Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +77,7 @@ class Cart : Fragment(), CartProductClickListener {
         val popup = PopupMenu(this.context, view)
         popup.inflate(R.menu.cart_product_edit)
 
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+        popup.setOnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
                 R.id.edit -> {
@@ -100,7 +88,7 @@ class Cart : Fragment(), CartProductClickListener {
                 }
             }
             true
-        })
+        }
 
         popup.show()
     }
@@ -113,7 +101,7 @@ class Cart : Fragment(), CartProductClickListener {
 //            binding.selectAllCheckBox.isChecked  = false
             cartProductList.forEach { it.isCheck = false }
         }
-        cartProductAdapter.notifyDataSetChanged()
+        cartProductAdapter.notifyItemRangeChanged(0, cartProductList.size)
     }
 
     private fun populateProducts() {
