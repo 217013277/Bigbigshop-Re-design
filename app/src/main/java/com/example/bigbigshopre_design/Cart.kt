@@ -46,11 +46,8 @@ class Cart : Fragment(), CartProductClickListener {
         cartProductAdapter = CartProductAdapter(cartProductList, this)
         binding.recyclerViewCartProduct.adapter = cartProductAdapter
 
-        binding.selectAll.setOnClickListener {
-
-        }
-
-
+//        binding.selectAll.setOnClickListener { selectAll() }
+        binding.selectAllCheckBox.setOnClickListener { selectAll() }
 
         binding.addOnPromotionBar.setOnClickListener {
             if (binding.addOnPromotionContent.visibility == View.VISIBLE) {
@@ -62,13 +59,21 @@ class Cart : Fragment(), CartProductClickListener {
             }
         }
 
-
-
         return view
     }
 
-    private fun populateProducts()
-    {
+    private fun selectAll () {
+        if (binding.selectAllCheckBox.isChecked) {
+//            binding.selectAllCheckBox.isChecked  = true
+            cartProductList.forEach { it.isCheck = true }
+        } else {
+//            binding.selectAllCheckBox.isChecked  = false
+            cartProductList.forEach { it.isCheck = false }
+        }
+        cartProductAdapter.notifyDataSetChanged()
+    }
+
+    private fun populateProducts() {
         cartProductList.clear()
         val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123",1)
         cartProductList.add(products1)

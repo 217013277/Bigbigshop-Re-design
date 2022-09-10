@@ -452,7 +452,7 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/selectAllCheckBox"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange_main"
