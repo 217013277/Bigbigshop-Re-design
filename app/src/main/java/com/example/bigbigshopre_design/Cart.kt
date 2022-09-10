@@ -4,8 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCartBinding
@@ -61,11 +65,33 @@ class Cart : Fragment(), CartProductClickListener {
             }
         }
 
+        binding.bottomBarEditButton.setOnClickListener { showPopup(binding.bottomBarEditButton) }
+
         binding.nextButton.setOnClickListener {
             startActivity(Intent(activity?.applicationContext, CheckoutActivity::class.java))
         }
 
         return view
+    }
+
+    private fun showPopup(view: View) {
+        val popup = PopupMenu(this.context, view)
+        popup.inflate(R.menu.cart_product_edit)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.edit -> {
+                    Toast.makeText(this.context, item.title, Toast.LENGTH_SHORT).show()
+                }
+                R.id.remove -> {
+                    Toast.makeText(this.context, item.title, Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        })
+
+        popup.show()
     }
 
     private fun selectAll () {
@@ -89,6 +115,10 @@ class Cart : Fragment(), CartProductClickListener {
     }
 
     override fun onClick(cartProduct: CartProduct) {
+    }
+
+    override fun onEdit(id: Int) {
+        showPopup(binding.recyclerViewCartProduct[id].findViewById(R.id.cartProductEditButton))
     }
 
     override fun onSelect(id: Int) {

@@ -21,6 +21,10 @@ class CartProductViewHolder (
 
             cartProductCellBinding.checkBox.isChecked = cartProduct.isCheck
 
+            cartProductCellBinding.cartProductEditButton.setOnClickListener {
+                cartProduct.id?.let { item -> clickListener.onEdit(item) }
+            }
+
             cartProductCellBinding.checkBox.setOnClickListener {
                 cartProduct.id?.let { item -> clickListener.onSelect(item) }
             }
