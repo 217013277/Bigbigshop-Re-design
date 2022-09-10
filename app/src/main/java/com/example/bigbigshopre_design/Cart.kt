@@ -106,10 +106,10 @@ class Cart : Fragment(), CartProductClickListener {
 
     private fun populateProducts() {
         cartProductList.clear()
-        val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "兒童口罩", 88, 123,1)
+        val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "Carun x Med360+ 3S特柔放敏口罩 (50片獨立包裝) 小童口罩 ASTM LV3", 88, 123,1)
         cartProductList.add(products1)
 
-        val products2 = CartProduct(R.drawable.mask_for_adult, "大口仔", "成人口罩", 128, 188, 1)
+        val products2 = CartProduct(R.drawable.mask_for_adult, "大口仔", "Carun x Med360+ 3S特柔放敏口罩 (50片獨立包裝) 成人口罩 ASTM LV3", 128, 188, 1)
         cartProductList.add(products2)
     }
 
