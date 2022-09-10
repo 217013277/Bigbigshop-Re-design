@@ -207,11 +207,11 @@
                 android:textStyle="bold"/>
 
             <EditText
+                android:id="@+id/editTextBuyerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="姓名"
-                android:inputType="textPersonName"
-                 />
+                android:inputType="textPersonName" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -219,11 +219,13 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/editTextBuyerLocale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="區號"
                     android:text="+852" />
                 <EditText
+                    android:id="@+id/editTextBuyerPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="手提電話"
@@ -231,6 +233,7 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/editTextBuyerEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="電子郵件"
@@ -285,6 +288,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
                 <EditText
+                    android:id="@+id/editTextReceiverName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="姓名"
@@ -296,11 +300,13 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/editTextReceiverLocale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="區號"
                         android:text="+852" />
                     <EditText
+                        android:id="@+id/editTextReceiverPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="手提電話"
