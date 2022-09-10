@@ -1,5 +1,6 @@
 package com.example.bigbigshopre_design
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.example.bigbigshopre_design.lists.cartProduct.CartProduct
 import com.example.bigbigshopre_design.lists.cartProduct.CartProductAdapter
 import com.example.bigbigshopre_design.lists.cartProduct.CartProductClickListener
 import com.example.bigbigshopre_design.lists.cartProduct.cartProductList
+import com.example.bigbigshopre_design.lists.product.PRODUCT_ID_EXTRA
 
 /**
  * A simple [Fragment] subclass.
@@ -57,6 +59,10 @@ class Cart : Fragment(), CartProductClickListener {
                 binding.addOnPromotionBarIndicator.rotation = 90.0F
                 binding.addOnPromotionContent.visibility = View.VISIBLE
             }
+        }
+
+        binding.nextButton.setOnClickListener {
+            startActivity(Intent(activity?.applicationContext, CheckoutActivity::class.java))
         }
 
         return view

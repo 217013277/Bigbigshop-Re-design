@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity">
+
+    <HorizontalScrollView
+        android:id="@+id/breadcrumb"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:fadeScrollbars="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/breadcrumb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/num_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bg_gray"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/breadcrumbTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="購物車"
+                    android:textSize="20sp"
+                    android:textColor="@color/gray"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/breadcrumb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="@color/gray" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/num_txt_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bg_red"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/breadcrumbTv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="取貨及付款方式"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/breadcrumb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/num_txt_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/bg_gray"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/breadcrumbTv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="完成"
+                    android:textSize="20sp"
+                    android:textColor="@color/gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/breadcrumb" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

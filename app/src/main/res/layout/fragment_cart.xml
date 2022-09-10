@@ -508,7 +508,8 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/CardView6"
+            android:id="@+id/nextButton"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
