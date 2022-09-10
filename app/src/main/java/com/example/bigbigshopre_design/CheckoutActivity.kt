@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.children
 import com.example.bigbigshopre_design.databinding.ActivityCheckoutBinding
 import com.example.bigbigshopre_design.databinding.ActivityMainBinding
 
@@ -35,9 +36,11 @@ class CheckoutActivity : AppCompatActivity() {
         if (binding.checkoutMethodRadioGroup.checkedRadioButtonId == -1) {
             // no radio buttons are checked
             Toast.makeText(this, "Payment method not checked", Toast.LENGTH_SHORT).show()
+            binding.checkoutMethodRadioGroupError.visibility = View.VISIBLE
         } else {
             // one of the radio buttons is checked
             Toast.makeText(this, "Payment method checked", Toast.LENGTH_SHORT).show()
+            binding.checkoutMethodRadioGroupError.visibility = View.GONE
         }
     }
 }
