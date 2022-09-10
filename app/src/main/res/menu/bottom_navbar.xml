@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:title="Home"
+    <item android:title="首頁"
         android:id="@+id/home"
         android:icon="@drawable/ic_baseline_home_24"/>
-    <item android:title="Favourite"
+    <item android:title="我的最愛"
         android:id="@+id/favourite"
         android:icon="@drawable/ic_baseline_favorite_24"/>
-    <item android:title="Category"
+    <item android:title="商品分類"
         android:id="@+id/category"
         android:icon="@drawable/ic_baseline_folder_24"/>
-    <item android:title="Cart"
+    <item android:title="購物車"
         android:id="@+id/cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"/>
-    <item android:title="Profile"
+    <item android:title="設定"
         android:id="@+id/profile"
         android:icon="@drawable/ic_baseline_person_24"/>
 </menu>

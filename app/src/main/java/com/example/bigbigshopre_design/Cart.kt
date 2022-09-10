@@ -50,6 +50,20 @@ class Cart : Fragment(), CartProductClickListener {
 
         }
 
+
+
+        binding.addOnPromotionBar.setOnClickListener {
+            if (binding.addOnPromotionContent.visibility == View.VISIBLE) {
+                binding.addOnPromotionBarIndicator.rotation = 0.0F
+                binding.addOnPromotionContent.visibility = View.GONE
+            } else {
+                binding.addOnPromotionBarIndicator.rotation = 90.0F
+                binding.addOnPromotionContent.visibility = View.VISIBLE
+            }
+        }
+
+
+
         return view
     }
 

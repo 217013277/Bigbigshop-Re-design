@@ -1,6 +1,5 @@
 package com.example.bigbigshopre_design
 
-import android.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment

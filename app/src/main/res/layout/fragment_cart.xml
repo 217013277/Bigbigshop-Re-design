@@ -226,14 +226,15 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/addOnPromotionBarIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_play_arrow_24"
                     android:rotation="90"
                     android:background="@color/white"
-                    app:tint="@color/orange_main" />
+                    app:tint="@color/orange_main"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -250,6 +251,7 @@
                 android:background="?android:attr/listDivider" />
 
             <LinearLayout
+                android:id="@+id/addOnPromotionContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
