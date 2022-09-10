@@ -1,7 +1,9 @@
 package com.example.bigbigshopre_design
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -10,14 +12,12 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.get
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCartBinding
 import com.example.bigbigshopre_design.lists.cartProduct.CartProduct
 import com.example.bigbigshopre_design.lists.cartProduct.CartProductAdapter
 import com.example.bigbigshopre_design.lists.cartProduct.CartProductClickListener
 import com.example.bigbigshopre_design.lists.cartProduct.cartProductList
-import com.example.bigbigshopre_design.lists.product.PRODUCT_ID_EXTRA
 
 /**
  * A simple [Fragment] subclass.
@@ -29,9 +29,9 @@ class Cart : Fragment(), CartProductClickListener {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-
     private lateinit var cartProductAdapter: CartProductAdapter
+
+    private var cartSum: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +51,8 @@ class Cart : Fragment(), CartProductClickListener {
         binding.recyclerViewCartProduct.layoutManager = LinearLayoutManager(activity?.applicationContext)
         cartProductAdapter = CartProductAdapter(cartProductList, this)
         binding.recyclerViewCartProduct.adapter = cartProductAdapter
+
+        calculateSum()
 
 //        binding.selectAll.setOnClickListener { selectAll() }
         binding.selectAllCheckBox.setOnClickListener { selectAll() }
@@ -72,6 +74,15 @@ class Cart : Fragment(), CartProductClickListener {
         }
 
         return view
+    }
+
+    private fun calculateSum() {
+        cartSum = 0
+        cartProductList.forEach {
+            if (it.isCheck) cartSum += it.price * it.quantity
+        }
+
+        binding.cartSum.text = String.format("%.2f",cartSum.toDouble())
     }
 
     private fun showPopup(view: View) {
@@ -107,10 +118,10 @@ class Cart : Fragment(), CartProductClickListener {
 
     private fun populateProducts() {
         cartProductList.clear()
-        val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "兒童口罩", "HK$88", "HK123",1)
+        val products1 = CartProduct(R.drawable.mask_for_kid, "細口仔", "兒童口罩", 88, 123,1)
         cartProductList.add(products1)
 
-        val products2 = CartProduct(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188", 1)
+        val products2 = CartProduct(R.drawable.mask_for_adult, "大口仔", "成人口罩", 128, 188, 1)
         cartProductList.add(products2)
     }
 
@@ -124,11 +135,16 @@ class Cart : Fragment(), CartProductClickListener {
     override fun onSelect(id: Int) {
         cartProductList[id].isCheck = !cartProductList[id].isCheck
         cartProductAdapter.notifyItemChanged(id)
+        calculateSum()
     }
 
     override fun onDelete(id: Int) {
         cartProductList.removeAt(id)
         cartProductAdapter.notifyItemRemoved(id)
+    }
+
+    override fun onChange() {
+        calculateSum()
     }
 
 }

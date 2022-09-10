@@ -443,7 +443,8 @@
             android:layout_marginStart="8dp"
             android:layout_weight="0.3"
             android:background="@color/white"
-            android:src="@drawable/ic_baseline_edit_24" />
+            android:src="@drawable/ic_baseline_edit_24"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/selectAll"
@@ -458,7 +459,7 @@
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange_main"
-                android:checked="false" />
+                android:checked="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -493,13 +494,29 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ 128.00"
-                    android:textColor="@color/orange_main"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$ "
+                        android:textColor="@color/orange_main"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/cartSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="128.00"
+                        android:textColor="@color/orange_main"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"

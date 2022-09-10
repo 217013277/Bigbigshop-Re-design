@@ -6,4 +6,5 @@ interface CartProductClickListener {
     fun onEdit(id:Int)
     fun onSelect(id:Int)
     fun onDelete(id: Int)
+    fun onChange()
 }

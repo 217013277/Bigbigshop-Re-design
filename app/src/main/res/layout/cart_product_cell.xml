@@ -32,12 +32,13 @@
 
                     <ImageButton
                         android:id="@+id/cartProductEditButton"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_weight="1"
                         android:background="@color/white"
-                        android:src="@drawable/ic_baseline_edit_24" />
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:visibility="gone" />
 
                     <CheckBox
                         android:id="@+id/checkBox"
@@ -131,19 +132,32 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HK$"
+                        android:textColor="@color/orange_main"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+                    <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="HK$128"
+                        android:text="128"
                         android:textColor="@color/orange_main"
                         android:textSize="18sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="HK$"
+                        android:textSize="14sp"
                         android:textStyle="bold"/>
                     <TextView
                         android:id="@+id/original"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="HK$188"
+                        android:text="188"
                         android:textSize="14sp"
                         android:textStyle="bold"/>
                 </LinearLayout>

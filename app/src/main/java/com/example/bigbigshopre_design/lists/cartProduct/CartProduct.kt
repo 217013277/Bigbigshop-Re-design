@@ -8,9 +8,9 @@ class CartProduct (
     var cover: Int,
     var brand: String,
     var name: String,
-    var price: String,
-    var original: String,
+    var price: Int,
+    var original: Int,
     var quantity: Int = 1,
-    var isCheck: Boolean = false,
+    var isCheck: Boolean = true,
     val id: Int? = cartProductList.size
 )

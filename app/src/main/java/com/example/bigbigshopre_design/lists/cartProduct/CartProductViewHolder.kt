@@ -14,8 +14,8 @@ class CartProductViewHolder (
             cartProductCellBinding.cartProductImage.setImageResource(cartProduct.cover)
             cartProductCellBinding.brand.text = cartProduct.brand
             cartProductCellBinding.name.text = cartProduct.name
-            cartProductCellBinding.price.text = cartProduct.price
-            cartProductCellBinding.original.text = cartProduct.original
+            cartProductCellBinding.price.text = cartProduct.price.toString()
+            cartProductCellBinding.original.text = cartProduct.original.toString()
 
             cartProductCellBinding.quantity.text = cartProduct.quantity.toString()
 
@@ -32,16 +32,17 @@ class CartProductViewHolder (
             cartProductCellBinding.add.setOnClickListener{
                 cartProduct.quantity += 1
                 cartProductCellBinding.quantity.text = cartProduct.quantity.toString()
+                clickListener.onChange()
             }
 
             cartProductCellBinding.deduct.setOnClickListener{
                 cartProduct.quantity -= 1
-                Log.d(TAG,cartProduct.quantity.toString())
                 if (cartProduct.quantity <= 0) {
                     cartProduct.id?.let { item -> clickListener.onDelete(item) }
                 } else {
                     cartProductCellBinding.quantity.text = cartProduct.quantity.toString()
                 }
+                clickListener.onChange()
             }
         }
     }
