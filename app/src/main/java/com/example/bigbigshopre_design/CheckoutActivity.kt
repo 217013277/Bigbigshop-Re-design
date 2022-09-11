@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.util.PatternsCompat
 import com.example.bigbigshopre_design.databinding.ActivityCheckoutBinding
 
 class CheckoutActivity : AppCompatActivity() {
@@ -65,12 +66,23 @@ class CheckoutActivity : AppCompatActivity() {
         if (binding.editTextBuyerPhone.text.toString().isEmpty()) {
             binding.editTextBuyerPhone.error = "請輸入你的手提電話"
             allCorrect = false
+        } else if (
+            binding.editTextBuyerPhone.text.toString().length != 8) {
+            binding.editTextBuyerPhone.error = "手提電話長度不正確"
+            allCorrect = false
         }
     }
 
     private fun checkBuyerEmail() {
         if (binding.editTextBuyerEmail.text.toString().isEmpty()) {
             binding.editTextBuyerEmail.error = "請輸入你的電子郵件"
+            allCorrect = false
+        } else if (
+            !PatternsCompat.EMAIL_ADDRESS
+                .matcher(binding.editTextBuyerEmail.text.toString())
+                .matches()
+        ) {
+            binding.editTextBuyerEmail.error = "電子郵件不正確"
             allCorrect = false
         }
     }
@@ -87,11 +99,17 @@ class CheckoutActivity : AppCompatActivity() {
             binding.editTextReceiverLocale.error = "請輸入收貨人的地區號碼"
             allCorrect = false
         }
+
+
     }
 
     private fun checkReceiverPhone() {
         if (binding.editTextReceiverPhone.text.toString().isEmpty()) {
             binding.editTextReceiverPhone.error = "請輸入收貨人手提電話"
+            allCorrect = false
+        } else if (
+            binding.editTextReceiverPhone.text.toString().length != 8) {
+            binding.editTextReceiverPhone.error = "收貨人手提電話長度不正確"
             allCorrect = false
         }
     }

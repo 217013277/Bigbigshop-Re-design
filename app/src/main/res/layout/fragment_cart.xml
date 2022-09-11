@@ -267,12 +267,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="買滿1件產品，即可以特惠價換購Bio-essence/Ebene"
-                        android:lines="2"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="1dp"
@@ -309,12 +308,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="買滿1件產品，即以低至73折換購 L’Oreal Paris指定女士護膚產品"
-                        android:lines="2"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="1dp"
@@ -351,7 +349,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="買滿1件產品，即以低至73折換購 L’Oreal Paris指定男士護膚產品"
-                        android:lines="2"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
@@ -393,7 +390,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="買滿1件產品，即以低至73折換購 L’Oreal Paris指定男士護膚產品"
-                        android:lines="2"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 

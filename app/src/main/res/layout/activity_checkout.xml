@@ -223,7 +223,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="區號"
-                    android:text="852" />
+                    android:text="852"
+                    android:inputType="phone"/>
                 <EditText
                     android:id="@+id/editTextBuyerPhone"
                     android:layout_width="match_parent"
@@ -304,7 +305,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="區號"
-                        android:text="852" />
+                        android:text="852"
+                        android:inputType="phone"/>
                     <EditText
                         android:id="@+id/editTextReceiverPhone"
                         android:layout_width="match_parent"
