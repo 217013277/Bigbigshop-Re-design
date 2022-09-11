@@ -121,14 +121,15 @@ class Cart : Fragment(), CartProductClickListener {
     }
 
     override fun onSelect(id: Int) {
-        cartProductList[id].isCheck = !cartProductList[id].isCheck
-        cartProductAdapter.notifyItemChanged(id)
+        cartProductList.forEach {
+            if(it.id == id) it.isCheck = !it.isCheck }
+        cartProductAdapter.notifyDataSetChanged()
         calculateSum()
     }
 
     override fun onDelete(id: Int) {
         cartProductList.removeAt(id)
-        cartProductAdapter.notifyItemRemoved(id)
+        cartProductAdapter.notifyDataSetChanged()
     }
 
     override fun onChange() {

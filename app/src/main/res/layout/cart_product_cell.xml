@@ -89,7 +89,9 @@
                             android:text="添加商品"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            app:drawableLeftCompat="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:drawableTint="@color/white"/>
 
                     </androidx.cardview.widget.CardView>
 

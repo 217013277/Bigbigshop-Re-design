@@ -38,7 +38,7 @@ class CartProductViewHolder (
             cartProductCellBinding.deduct.setOnClickListener{
                 cartProduct.quantity -= 1
                 if (cartProduct.quantity <= 0) {
-                    cartProduct.id?.let { item -> clickListener.onDelete(item) }
+                    adapterPosition.let { item -> clickListener.onDelete(item) }
                 } else {
                     cartProductCellBinding.quantity.text = cartProduct.quantity.toString()
                 }

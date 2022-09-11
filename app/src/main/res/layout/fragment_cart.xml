@@ -287,7 +287,9 @@
                             android:text="添加商品"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            app:drawableTint="@color/white"
+                            app:drawableLeftCompat="@drawable/ic_baseline_add_shopping_cart_24" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -327,7 +329,9 @@
                             android:text="添加商品"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            app:drawableLeftCompat="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:drawableTint="@color/white" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -367,7 +371,9 @@
                             android:text="添加商品"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            app:drawableLeftCompat="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:drawableTint="@color/white"/>
 
                     </androidx.cardview.widget.CardView>
 
@@ -407,7 +413,9 @@
                             android:text="添加商品"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            app:drawableLeftCompat="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:drawableTint="@color/white"/>
 
                     </androidx.cardview.widget.CardView>
 
