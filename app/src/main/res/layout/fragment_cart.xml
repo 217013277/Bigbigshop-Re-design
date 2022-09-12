@@ -353,7 +353,7 @@
                         android:textStyle="bold"/>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="1dp"
@@ -394,7 +394,7 @@
                         android:textStyle="bold"/>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="1dp"
