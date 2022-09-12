@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 import com.example.bigbigshopre_design.lists.category.Category
@@ -57,6 +58,18 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         binding.recycleViewProduct.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
         productAdapter = ProductAdapter(productList, this)
         binding.recycleViewProduct.adapter = productAdapter
+
+        var sortOrder = false
+        binding.btnSort.setOnClickListener {
+            if (!sortOrder) {
+                productList.sortBy { it.price }
+                sortOrder = true
+            } else {
+                productList.sortByDescending { it.price }
+                sortOrder = false
+            }
+
+            productAdapter.notifyDataSetChanged()}
 
         binding.productLists.visibility = View.GONE
 

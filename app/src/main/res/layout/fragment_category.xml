@@ -203,7 +203,8 @@
                     android:orientation="horizontal"
                     android:layout_marginBottom="8dp">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/btnSort"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -211,6 +212,7 @@
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_weight="1"/>
 
                     <View
