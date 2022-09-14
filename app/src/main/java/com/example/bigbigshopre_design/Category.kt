@@ -5,18 +5,18 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 import com.example.bigbigshopre_design.lists.category.*
 import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.product.*
 import com.google.gson.Gson
-import java.io.IOException
 import org.json.JSONException
+import java.io.IOException
 import java.nio.charset.Charset
 
 
@@ -218,5 +218,60 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             return null
         }
         return json
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu,menu)
+        val menuItem = menu.findItem(R.id.actionSearch)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filter(newText!!)
+                return true
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun filter(text: String) {
+        // creating a new array list to filter our data.
+        val searchResultArrayList: ArrayList<Product> = ArrayList()
+
+        // running a for loop to compare elements.
+        for (item in initialProductModelClass.products) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.brand.lowercase().contains(text.lowercase()) ||
+                item.name.lowercase().contains(text.lowercase())
+            ) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                searchResultArrayList.add(item)
+            }
+        }
+        if (searchResultArrayList.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            productAdapter.searchList(searchResultArrayList)
+        }
+
     }
 }

@@ -9,7 +9,7 @@ import com.example.bigbigshopre_design.databinding.ProductCellBinding
 
 class ProductAdapter(
     val context: Context,
-    private val products: ArrayList<Product>,
+    private var products: ArrayList<Product>,
     private val clickListener: ProductClickListener
     ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -50,21 +50,15 @@ class ProductAdapter(
 
         val card = binding.cardView
 
-//        fun bindProduct(product: Product) {
-////            val path = context.resources.getIdentifier(product.image,"drawable",context.packageName)
-////        productCellBinding.cover.setImageResource(product.image)
-//
-//            val image = binding.cover
-//            val brand = binding.brand
-//            val name = binding.name
-//            val salesPrice = binding.price
-//            val originalPrice = binding.original
-//
-//            val card = binding.cardView
-//
-//            binding.cardView.setOnClickListener{
-//                clickListener.onClick(product)
-//            }
-//        }
+    }
+
+    fun searchList(searchResultArrayList: ArrayList<Product>) {
+        // below line is to add our filtered
+        // list in our course array list.
+        products = searchResultArrayList
+        // below line is to notify our adapter
+        // as change in recycler view data.
+
+        notifyDataSetChanged()
     }
 }
