@@ -2,8 +2,8 @@
   "products": [
     {"id":  1,
       "image" : "shaver",
-      "brand": "大吉大利",
-      "name": "男士剃鬚刀",
+      "brand": "大吉利",
+      "name": "大吉利男士剃鬚刀",
       "salesPrice": 199,
       "originalPrice": 399,
       "categories":  [
@@ -11,9 +11,9 @@
       ]
     },
     {"id":  2,
-      "image" : "shaver",
-      "brand": "大吉大利",
-      "name": "男士剃鬚刀",
+      "image" : "shampoo",
+      "brand": "好乾淨",
+      "name": "好乾淨洗頭水",
       "salesPrice": 55,
       "originalPrice": 90,
       "categories":  [
@@ -24,7 +24,7 @@
     {"id":  3,
       "image" : "mask_for_kid",
       "brand": "細口仔",
-      "name": "兒童口罩",
+      "name": "細口仔兒童口罩",
       "salesPrice": 88,
       "originalPrice": 123,
       "categories":  [
@@ -37,7 +37,7 @@
     {"id":  4,
       "image" : "mask_for_adult",
       "brand": "大口仔",
-      "name": "成人口罩",
+      "name": "大口仔成人口罩",
       "salesPrice": 128,
       "originalPrice": 188,
       "categories":  [
