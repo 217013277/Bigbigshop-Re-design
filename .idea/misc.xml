@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_success.xml" value="0.1" />
         <entry key="app/src/main/res/layout/product_cell.xml" value="0.2453125" />
         <entry key="app/src/main/res/menu/bottom_navbar.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/menu/cart_product_edit.xml" value="0.23020833333333332" />
       </map>
     </option>
   </component>

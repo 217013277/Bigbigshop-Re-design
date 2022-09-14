@@ -7,11 +7,11 @@ class CategoryViewHolder(
     private val categoryCellBinding: CategoryCellBinding,
     private val clickListener: CategoryClickListener
     ): RecyclerView.ViewHolder(categoryCellBinding.root) {
-    fun bindCategory(category: Category) {
-        categoryCellBinding.categoryTitle.text = category.title
+    fun bindCategory(categoryDataModel: CategoryModelClass) {
+        categoryCellBinding.categoryTitle.text = categoryDataModel.title
 
         categoryCellBinding.categoryCardView.setOnClickListener{
-            clickListener.onClick(category)
+            clickListener.onClick(categoryDataModel)
         }
     }
 }

@@ -9,14 +9,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
-import com.example.bigbigshopre_design.lists.category.Category
-import com.example.bigbigshopre_design.lists.category.CategoryAdapter
-import com.example.bigbigshopre_design.lists.category.CategoryClickListener
-import com.example.bigbigshopre_design.lists.category.categoryList
+import com.example.bigbigshopre_design.lists.category.*
 import com.example.bigbigshopre_design.lists.product.*
+import com.google.gson.Gson
+import java.io.IOException
+import org.json.JSONException
+import java.nio.charset.Charset
+
 
 /**
  * A simple [Fragment] subclass.
@@ -33,6 +34,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
 
+    private var categories = Categories(arrayListOf())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -46,12 +49,22 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        populateCategories()
+        try {
+            val jsonString = getJSONFromAssets("Categories.json")!!
+            Log.d("categoryList", jsonString)
+            categories = Gson().fromJson(jsonString, Categories::class.java)
+        } catch (e: JSONException) {
+            //exception
+            e.printStackTrace()
+        }
+        Log.d("categoryList", categories.categoryList[0].title)
+
+//        populateCategories()
         populateProducts1()
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        categoryAdapter = CategoryAdapter(categoryList, this)
+        categoryAdapter = CategoryAdapter(categories.categoryList, this)
         binding.recyclerViewCategory.adapter = categoryAdapter
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
@@ -62,10 +75,10 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         var sortOrder = false
         binding.btnSort.setOnClickListener {
             if (!sortOrder) {
-                productList.sortBy { it.price }
+                productList.sortBy { it.name }
                 sortOrder = true
             } else {
-                productList.sortByDescending { it.price }
+                productList.sortByDescending { it.name }
                 sortOrder = false
             }
 
@@ -80,7 +93,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb5.visibility = View.GONE
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories()
+//            populateCategories()
             categoryAdapter.notifyDataSetChanged()
             binding.productLists.visibility = View.GONE
         }
@@ -91,7 +104,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb5.visibility = View.GONE
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories3PersonalCare()
+//            populateCategories3PersonalCare()
             categoryAdapter.notifyDataSetChanged()
             populateProducts1()
             productAdapter.notifyDataSetChanged()
@@ -103,7 +116,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb5.visibility = View.GONE
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories4BodyCare()
+//            populateCategories4BodyCare()
             categoryAdapter.notifyDataSetChanged()
             populateProducts2()
             productAdapter.notifyDataSetChanged()
@@ -114,7 +127,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.Header.text = "口罩及配件"
             binding.breadcrumb6.visibility = View.GONE
             binding.breadcrumb7.visibility = View.GONE
-            populateCategories5Mask()
+//            populateCategories5Mask()
             categoryAdapter.notifyDataSetChanged()
             populateProducts3()
             productAdapter.notifyDataSetChanged()
@@ -176,7 +189,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     }
 
 
-    private fun populateCategories() {
+/*    private fun populateCategories() {
         categoryList.clear()
         val category1 = Category("講飲講食")
         categoryList.add(category1)
@@ -302,9 +315,11 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryList.clear()
     }
 
+ */
+
     @SuppressLint("NotifyDataSetChanged")
-    override fun onClick(category: Category) {
-        when(category.title) {
+    override fun onClick(categoryDataModel: CategoryModelClass) {
+        when(categoryDataModel.title) {
             /*"講飲講食" -> {
                 populateCategories_3_food()
                 binding.breadcrumbTv3.text = category.title
@@ -317,30 +332,30 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
                 binding.breadcrumb3.visibility = View.VISIBLE
             }*/
             "個人護理" -> {
-                populateCategories3PersonalCare()
+//                populateCategories3PersonalCare()
                 populateProducts1()
-                binding.breadcrumbTv3.text = category.title
+//                binding.breadcrumbTv3.text = category.title
                 binding.breadcrumb3.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "身體護理" -> {
-                populateCategories4BodyCare()
+//                populateCategories4BodyCare()
                 populateProducts2()
-                binding.breadcrumbTv4.text = category.title
+//                binding.breadcrumbTv4.text = category.title
                 binding.breadcrumb4.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "口罩及配件" -> {
-                populateCategories5Mask()
+//                populateCategories5Mask()
                 populateProducts3()
-                binding.breadcrumbTv5.text = category.title
+//                binding.breadcrumbTv5.text = category.title
                 binding.breadcrumb5.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "成人口罩" -> {
-                populateCategories6MaskAdult()
+//                populateCategories6MaskAdult()
                 populateProducts4()
-                binding.breadcrumbTv6.text = category.title
+//                binding.breadcrumbTv6.text = category.title
                 binding.breadcrumb6.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
@@ -349,12 +364,29 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         categoryAdapter.notifyDataSetChanged()
         productAdapter.notifyDataSetChanged()
 
-        binding.Header.text = category.title
+//        binding.Header.text = category.title
     }
 
     override fun onClick(product: Product) {
         val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
         intent.putExtra(PRODUCT_ID_EXTRA, product.id)
         startActivity(intent)
+    }
+
+    private fun getJSONFromAssets(fileName: String): String? {
+        val json: String?
+        val charset: Charset = Charsets.UTF_8
+        try {
+            val myUsersJSONFile = this.requireContext().assets.open(fileName)
+            val size = myUsersJSONFile.available()
+            val buffer = size.let { ByteArray(it) }
+            myUsersJSONFile.read(buffer)
+            myUsersJSONFile.close()
+            json = buffer.let { String(it, charset) }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return null
+        }
+        return json
     }
 }
