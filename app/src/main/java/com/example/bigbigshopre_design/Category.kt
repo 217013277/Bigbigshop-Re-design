@@ -10,7 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
+import com.example.bigbigshopre_design.lists.breadcrumb.BreadcrumbAdapter
+import com.example.bigbigshopre_design.lists.breadcrumb.BreadcrumbClickListener
+import com.example.bigbigshopre_design.lists.breadcrumb.BreadcrumbModelClass
+import com.example.bigbigshopre_design.lists.breadcrumb.breadcrumbList
 import com.example.bigbigshopre_design.lists.category.*
 import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.product.*
@@ -25,13 +30,14 @@ import java.nio.charset.Charset
  * Use the [Category.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Category : Fragment(), CategoryClickListener, ProductClickListener {
+class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, ProductClickListener {
 
     private var _binding: FragmentCategoryBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var breadcrumbAdapter: BreadcrumbAdapter
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
 
@@ -56,6 +62,16 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
         binding.productLists.visibility = View.GONE
 
+        breadcrumbList.add(BreadcrumbModelClass(currentCategory))
+
+        breadcrumbList.add(BreadcrumbModelClass("cde"))
+        breadcrumbList.add(BreadcrumbModelClass("efg"))
+
+        binding.recyclerViewBreadcrumb.setHasFixedSize(true)
+        binding.recyclerViewBreadcrumb.layoutManager = LinearLayoutManager(activity?.applicationContext , LinearLayoutManager.HORIZONTAL, false)
+        breadcrumbAdapter = BreadcrumbAdapter(breadcrumbList, this)
+        binding.recyclerViewBreadcrumb.adapter = breadcrumbAdapter
+
         try {
             val jsonString = getJSONFromAssets("Categories.json")!!
             initialCategoryModelClass = Gson().fromJson(jsonString, CategoryModelClass::class.java)
@@ -67,9 +83,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
         try {
             val jsonString = getJSONFromAssets("Products.json")!!
-            Log.d("Products", jsonString)
             initialProductModelClass = Gson().fromJson(jsonString, ProductModelClass::class.java)
-            Log.d("Products", initialProductModelClass.products[0].toString())
         } catch (e: JSONException) {
             //exception
             e.printStackTrace()
@@ -98,57 +112,63 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
             productAdapter.notifyDataSetChanged()}
 
-        binding.breadcrumbTv1.setOnClickListener {
-            currentCategory = binding.breadcrumbTv1.text.toString()
-            Log.d("currentCategory", currentCategory)
-            binding.Header.text = currentCategory
-            populateCategoryList()
-
-            populateProductList()
-
-
-            binding.Header.text = binding.Header.text
-            binding.breadcrumb3.visibility = View.GONE
-            binding.breadcrumb4.visibility = View.GONE
-            binding.breadcrumb5.visibility = View.GONE
-            binding.breadcrumb6.visibility = View.GONE
-            binding.breadcrumb7.visibility = View.GONE
-            categoryAdapter.notifyDataSetChanged()
-            binding.productLists.visibility = View.GONE
-        }
-
-        binding.breadcrumbTv3.setOnClickListener {
-            binding.Header.text = "個人護理"
-            binding.breadcrumb4.visibility = View.GONE
-            binding.breadcrumb5.visibility = View.GONE
-            binding.breadcrumb6.visibility = View.GONE
-            binding.breadcrumb7.visibility = View.GONE
-
-            categoryAdapter.notifyDataSetChanged()
-            productAdapter.notifyDataSetChanged()
-            binding.productLists.visibility = View.VISIBLE
-        }
-
-        binding.breadcrumbTv4.setOnClickListener {
-            binding.Header.text = "身體護理"
-            binding.breadcrumb5.visibility = View.GONE
-            binding.breadcrumb6.visibility = View.GONE
-            binding.breadcrumb7.visibility = View.GONE
-            categoryAdapter.notifyDataSetChanged()
-            productAdapter.notifyDataSetChanged()
-            binding.productLists.visibility = View.VISIBLE
-        }
-
-        binding.breadcrumbTv5.setOnClickListener {
-            binding.Header.text = "口罩及配件"
-            binding.breadcrumb6.visibility = View.GONE
-            binding.breadcrumb7.visibility = View.GONE
-            categoryAdapter.notifyDataSetChanged()
-            productAdapter.notifyDataSetChanged()
-            binding.productLists.visibility = View.VISIBLE
-        }
+//        binding.breadcrumbTv1.setOnClickListener {
+//            currentCategory = binding.breadcrumbTv1.text.toString()
+//            binding.Header.text = currentCategory
+//            populateCategoryList()
+//
+//            populateProductList()
+//
+//
+//            binding.Header.text = binding.Header.text
+//            binding.breadcrumb3.visibility = View.GONE
+//            binding.breadcrumb4.visibility = View.GONE
+//            binding.breadcrumb5.visibility = View.GONE
+//            binding.breadcrumb6.visibility = View.GONE
+//            binding.breadcrumb7.visibility = View.GONE
+//            categoryAdapter.notifyDataSetChanged()
+//            binding.productLists.visibility = View.GONE
+//        }
+//
+//        binding.breadcrumbTv3.setOnClickListener {
+//            binding.Header.text = "個人護理"
+//            binding.breadcrumb4.visibility = View.GONE
+//            binding.breadcrumb5.visibility = View.GONE
+//            binding.breadcrumb6.visibility = View.GONE
+//            binding.breadcrumb7.visibility = View.GONE
+//
+//            categoryAdapter.notifyDataSetChanged()
+//            productAdapter.notifyDataSetChanged()
+//            binding.productLists.visibility = View.VISIBLE
+//        }
+//
+//        binding.breadcrumbTv4.setOnClickListener {
+//            binding.Header.text = "身體護理"
+//            binding.breadcrumb5.visibility = View.GONE
+//            binding.breadcrumb6.visibility = View.GONE
+//            binding.breadcrumb7.visibility = View.GONE
+//            categoryAdapter.notifyDataSetChanged()
+//            productAdapter.notifyDataSetChanged()
+//            binding.productLists.visibility = View.VISIBLE
+//        }
+//
+//        binding.breadcrumbTv5.setOnClickListener {
+//            binding.Header.text = "口罩及配件"
+//            binding.breadcrumb6.visibility = View.GONE
+//            binding.breadcrumb7.visibility = View.GONE
+//            categoryAdapter.notifyDataSetChanged()
+//            productAdapter.notifyDataSetChanged()
+//            binding.productLists.visibility = View.VISIBLE
+//        }
 
         return view
+    }
+
+    override fun onClick(breadcrumbModelClass: BreadcrumbModelClass) {
+        Log.d("breadcrumbClicked", breadcrumbModelClass.name)
+        breadcrumbList.removeAt(breadcrumbModelClass.id!!)
+        Log.d("breadcrumbList", breadcrumbList.toString())
+        breadcrumbAdapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -159,25 +179,25 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         populateCategoryList()
         populateProductList()
 
-        when(currentCategory) {
-            "個人護理" -> {
-                binding.breadcrumb3.visibility = View.VISIBLE
-                binding.productLists.visibility = View.VISIBLE
-            }
-            "身體護理" -> {
-                binding.breadcrumb4.visibility = View.VISIBLE
-                binding.productLists.visibility = View.VISIBLE
-            }
-            "口罩及配件" -> {
-                binding.breadcrumb5.visibility = View.VISIBLE
-                binding.productLists.visibility = View.VISIBLE
-            }
-            "成人口罩" -> {
-                binding.breadcrumb6.visibility = View.VISIBLE
-                binding.productLists.visibility = View.VISIBLE
-            }
-            else -> Log.i(TAG,"nothing select")
-        }
+//        when(currentCategory) {
+//            "個人護理" -> {
+//                binding.breadcrumb3.visibility = View.VISIBLE
+//                binding.productLists.visibility = View.VISIBLE
+//            }
+//            "身體護理" -> {
+//                binding.breadcrumb4.visibility = View.VISIBLE
+//                binding.productLists.visibility = View.VISIBLE
+//            }
+//            "口罩及配件" -> {
+//                binding.breadcrumb5.visibility = View.VISIBLE
+//                binding.productLists.visibility = View.VISIBLE
+//            }
+//            "成人口罩" -> {
+//                binding.breadcrumb6.visibility = View.VISIBLE
+//                binding.productLists.visibility = View.VISIBLE
+//            }
+//            else -> Log.i(TAG,"nothing select")
+//        }
         categoryAdapter.notifyDataSetChanged()
         productAdapter.notifyDataSetChanged()
     }

@@ -22,95 +22,103 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/breadcrumbTv1"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBreadcrumb"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/category"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/breadcrumb3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+<!--            <TextView-->
+<!--                android:id="@+id/breadcrumbTv1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/category"-->
+<!--                android:textSize="20sp" />-->
 
-                <TextView
-                    android:id="@+id/breadcrumbTv3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="個人護理"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:id="@+id/breadcrumb3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:visibility="gone">-->
 
-            <LinearLayout
-                android:id="@+id/breadcrumb4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+<!--                <TextView-->
+<!--                    android:id="@+id/breadcrumbTv3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="個人護理"-->
+<!--                    android:textSize="20sp"/>-->
+<!--            </LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/breadcrumbTv4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="身體護理"
-                    android:textSize="20sp" />
+<!--            <LinearLayout-->
+<!--                android:id="@+id/breadcrumb4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:visibility="gone">-->
 
-            </LinearLayout>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />-->
 
-            <LinearLayout
-                android:id="@+id/breadcrumb5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
+<!--                <TextView-->
+<!--                    android:id="@+id/breadcrumbTv4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="身體護理"-->
+<!--                    android:textSize="20sp" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+<!--            </LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/breadcrumbTv5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="口罩及配件"
-                    android:textSize="20sp" />
+<!--            <LinearLayout-->
+<!--                android:id="@+id/breadcrumb5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:visibility="gone">-->
 
-            </LinearLayout>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />-->
 
-            <LinearLayout
-                android:id="@+id/breadcrumb6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
+<!--                <TextView-->
+<!--                    android:id="@+id/breadcrumbTv5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="口罩及配件"-->
+<!--                    android:textSize="20sp" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+<!--            </LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/breadcrumbTv6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="成人口罩"
-                    android:textSize="20sp" />
+<!--            <LinearLayout-->
+<!--                android:id="@+id/breadcrumb6"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:visibility="gone">-->
 
-            </LinearLayout>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/breadcrumbTv6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="成人口罩"-->
+<!--                    android:textSize="20sp" />-->
+
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/breadcrumb7"

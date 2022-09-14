@@ -45,7 +45,7 @@ class Home : Fragment() {
         val view = binding.root
 
         binding.button.setOnClickListener {
-            val fragmentManager = getFragmentManager()
+            val fragmentManager = fragmentManager
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.frame_layout,Category())?.commit()
         }

@@ -15,7 +15,7 @@ class ProductAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val from = LayoutInflater.from(parent.context)
         val binding = ProductCellBinding.inflate(from, parent, false)
-        return ProductViewHolder(binding, clickListener)
+        return ProductViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -38,8 +38,7 @@ class ProductAdapter(
     override fun getItemCount(): Int = products.size
 
     class ProductViewHolder(
-        private val binding: ProductCellBinding,
-        private val clickListener: ProductClickListener
+        binding: ProductCellBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
         val image = binding.cover
