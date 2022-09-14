@@ -56,6 +56,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        binding.productLists.visibility = View.GONE
+
         try {
             val jsonString = getJSONFromAssets("Categories.json")!!
             initialCategoryModelClass = Gson().fromJson(jsonString, CategoryModelClass::class.java)
