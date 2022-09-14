@@ -208,7 +208,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="排序"
+                        android:text="依價格排序"
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
