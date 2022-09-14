@@ -63,22 +63,39 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/priceCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="HK$"
+                    android:textColor="@color/red_price"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="HK$199"
+                    android:text="199"
                     android:textColor="@color/red_price"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/original"
+                    android:id="@+id/originalCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="HK$299"
+                    android:text="HK$"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="299"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -89,6 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="加入購物車"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginStart="8dp" />
 
         </LinearLayout>
