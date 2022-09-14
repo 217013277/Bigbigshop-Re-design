@@ -2,11 +2,11 @@ package com.example.bigbigshopre_design.lists.category
 
 //val CATEGORY_ID_EXTRA = "categoryExtra"
 
-data class CategoryDataClass(
-    var categories: ArrayList<CategoryModelClass>
+data class CategoryModelClass(
+    var categories: ArrayList<Category>
 )
 
-data class CategoryModelClass (
+data class Category (
     val id: Int,
     val title: String,
     val parent: List<String>

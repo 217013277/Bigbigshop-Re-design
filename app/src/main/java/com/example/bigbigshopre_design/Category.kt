@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bigbigshopre_design.databinding.FragmentCategoryBinding
 import com.example.bigbigshopre_design.lists.category.*
+import com.example.bigbigshopre_design.lists.category.Category
 import com.example.bigbigshopre_design.lists.product.*
 import com.google.gson.Gson
 import java.io.IOException
@@ -34,9 +35,13 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
 
-    private var initialCategoryDataClass = CategoryDataClass(arrayListOf())
-    private var categoryDataClass: CategoryDataClass = CategoryDataClass(arrayListOf())
+    private var initialCategoryModelClass = CategoryModelClass(arrayListOf())
+    private var currentCategoryModelClass = CategoryModelClass(arrayListOf())
     private var currentCategory = "商品分類"
+
+    private var initialProductModelClass = ProductModelClass(arrayListOf())
+    private var currentProductModelClass = ProductModelClass(arrayListOf())
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,49 +58,61 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
         try {
             val jsonString = getJSONFromAssets("Categories.json")!!
-            Log.d("categoryList", jsonString)
-            initialCategoryDataClass = Gson().fromJson(jsonString, CategoryDataClass::class.java)
+            initialCategoryModelClass = Gson().fromJson(jsonString, CategoryModelClass::class.java)
+        } catch (e: JSONException) {
+            //exception
+            e.printStackTrace()
+        }
+        val firstCategoryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
+        currentCategoryModelClass.categories.addAll(firstCategoryList)
+
+        try {
+            val jsonString = getJSONFromAssets("Products.json")!!
+            Log.d("Products", jsonString)
+            initialProductModelClass = Gson().fromJson(jsonString, ProductModelClass::class.java)
+            Log.d("Products", initialProductModelClass.products[0].toString())
         } catch (e: JSONException) {
             //exception
             e.printStackTrace()
         }
 
-        val firstCategoryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
-        categoryDataClass.categories.addAll(firstCategoryList)
+        currentProductModelClass.products.addAll(
+            initialProductModelClass.products.filter { it.categories.contains("身體護理") }
+        )
 
 //        populateCategories()
-        populateProducts1()
+//        populateProducts1()
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        categoryAdapter = CategoryAdapter(categoryDataClass.categories, this)
+        categoryAdapter = CategoryAdapter(currentCategoryModelClass.categories, this)
         binding.recyclerViewCategory.adapter = categoryAdapter
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
         binding.recycleViewProduct.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        productAdapter = ProductAdapter(productList, this)
+        productAdapter = ProductAdapter(requireActivity().applicationContext, currentProductModelClass.products, this)
         binding.recycleViewProduct.adapter = productAdapter
 
         var sortOrder = false
         binding.btnSort.setOnClickListener {
             if (!sortOrder) {
-                productList.sortBy { it.name }
+                currentProductModelClass.products.sortBy { it.name }
                 sortOrder = true
             } else {
-                productList.sortByDescending { it.name }
+                currentProductModelClass.products.sortByDescending { it.name }
                 sortOrder = false
             }
 
             productAdapter.notifyDataSetChanged()}
 
-        binding.productLists.visibility = View.GONE
+//        binding.productLists.visibility = View.GONE
 
         binding.breadcrumbTv1.setOnClickListener {
             currentCategory = binding.breadcrumbTv1.text.toString()
             binding.Header.text = currentCategory
-            categoryDataClass.categories.clear()
-            val temporaryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
-            categoryDataClass.categories.addAll(temporaryList)
+            currentCategoryModelClass.categories.clear()
+            val temporaryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
+            currentCategoryModelClass.categories.addAll(temporaryList)
 
             binding.Header.text = binding.Header.text
             binding.breadcrumb3.visibility = View.GONE
@@ -116,7 +133,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb7.visibility = View.GONE
 //            populateCategories3PersonalCare()
             categoryAdapter.notifyDataSetChanged()
-            populateProducts1()
+//            populateProducts1()
             productAdapter.notifyDataSetChanged()
             binding.productLists.visibility = View.VISIBLE
         }
@@ -128,7 +145,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb7.visibility = View.GONE
 //            populateCategories4BodyCare()
             categoryAdapter.notifyDataSetChanged()
-            populateProducts2()
+//            populateProducts2()
             productAdapter.notifyDataSetChanged()
             binding.productLists.visibility = View.VISIBLE
         }
@@ -139,7 +156,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             binding.breadcrumb7.visibility = View.GONE
 //            populateCategories5Mask()
             categoryAdapter.notifyDataSetChanged()
-            populateProducts3()
+//            populateProducts3()
             productAdapter.notifyDataSetChanged()
             binding.productLists.visibility = View.VISIBLE
         }
@@ -147,6 +164,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         return view
     }
 
+    /*
     private fun populateProducts0() { productList.clear() }
 
     private fun populateProducts1()
@@ -197,7 +215,7 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         val products8 = Product(R.drawable.mask_for_adult, "大口仔", "成人口罩", "HK$128", "HK188")
         productList.add(products8)
     }
-
+     */
 
 /*    private fun populateCategories() {
         categoryList.clear()
@@ -328,15 +346,15 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
  */
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onClick(categoryDataModel: CategoryModelClass) {
+    override fun onClick(categoryDataModel: Category) {
         currentCategory = categoryDataModel.title
         binding.Header.text = currentCategory
         // change category when list item clicked
-        categoryDataClass.categories.clear()
-        val temporaryCategoryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
-        categoryDataClass.categories.addAll(temporaryCategoryList)
+        currentCategoryModelClass.categories.clear()
+        val temporaryCategoryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
+        currentCategoryModelClass.categories.addAll(temporaryCategoryList)
 
-        when(categoryDataModel.title) {
+        when(currentCategory) {
             /*"講飲講食" -> {
                 populateCategories_3_food()
                 binding.breadcrumbTv3.text = category.title
@@ -350,28 +368,28 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             }*/
             "個人護理" -> {
 //                populateCategories3PersonalCare()
-                populateProducts1()
+//                populateProducts1()
 //                binding.breadcrumbTv3.text = category.title
                 binding.breadcrumb3.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "身體護理" -> {
 //                populateCategories4BodyCare()
-                populateProducts2()
+//                populateProducts2()
 //                binding.breadcrumbTv4.text = category.title
                 binding.breadcrumb4.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "口罩及配件" -> {
 //                populateCategories5Mask()
-                populateProducts3()
+//                populateProducts3()
 //                binding.breadcrumbTv5.text = category.title
                 binding.breadcrumb5.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
             }
             "成人口罩" -> {
 //                populateCategories6MaskAdult()
-                populateProducts4()
+//                populateProducts4()
 //                binding.breadcrumbTv6.text = category.title
                 binding.breadcrumb6.visibility = View.VISIBLE
                 binding.productLists.visibility = View.VISIBLE
@@ -383,8 +401,9 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     }
 
     override fun onClick(product: Product) {
-        val intent = Intent(activity?.applicationContext, DetailActivity::class.java)
+        val intent = Intent(requireActivity().applicationContext, DetailActivity::class.java)
         intent.putExtra(PRODUCT_ID_EXTRA, product.id)
+//        intent.putExtra("product", listOf(product))
         startActivity(intent)
     }
 
@@ -394,10 +413,10 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         try {
             val myUsersJSONFile = this.requireContext().assets.open(fileName)
             val size = myUsersJSONFile.available()
-            val buffer = size.let { ByteArray(it) }
+            val buffer = ByteArray(size)
             myUsersJSONFile.read(buffer)
             myUsersJSONFile.close()
-            json = buffer.let { String(it, charset) }
+            json = String(buffer, charset)
         } catch (ex: IOException) {
             ex.printStackTrace()
             return null

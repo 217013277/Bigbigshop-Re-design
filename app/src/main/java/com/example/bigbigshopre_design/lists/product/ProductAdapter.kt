@@ -1,5 +1,6 @@
 package com.example.bigbigshopre_design.lists.product
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,9 +8,10 @@ import com.example.bigbigshopre_design.databinding.ProductCellBinding
 
 
 class ProductAdapter(
-    private val products: List<Product>,
+    val context: Context,
+    private val products: ArrayList<Product>,
     private val clickListener: ProductClickListener
-    ) : RecyclerView.Adapter<ProductViewHolder>()  {
+    ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val from = LayoutInflater.from(parent.context)
         val binding = ProductCellBinding.inflate(from, parent, false)
@@ -17,8 +19,52 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bindProduct(products[position])
+//        holder.bindProduct(products[position])
+        val listPosition = position
+        val product = products[position]
+
+        val path = context.resources.getIdentifier(product.image,"drawable",context.packageName)
+
+        holder.image.setImageResource(path)
+        holder.brand.text = product.brand
+        holder.name.text = product.name
+        holder.salesPrice.text = product.salesPrice.toString()
+        holder.originalPrice.text = product.originalPrice.toString()
+
+        holder.card.setOnClickListener { clickListener.onClick(product) }
+
     }
 
     override fun getItemCount(): Int = products.size
+
+    class ProductViewHolder(
+        private val binding: ProductCellBinding,
+        private val clickListener: ProductClickListener
+    ): RecyclerView.ViewHolder(binding.root) {
+
+        val image = binding.cover
+        val brand = binding.brand
+        val name = binding.name
+        val salesPrice = binding.price
+        val originalPrice = binding.original
+
+        val card = binding.cardView
+
+//        fun bindProduct(product: Product) {
+////            val path = context.resources.getIdentifier(product.image,"drawable",context.packageName)
+////        productCellBinding.cover.setImageResource(product.image)
+//
+//            val image = binding.cover
+//            val brand = binding.brand
+//            val name = binding.name
+//            val salesPrice = binding.price
+//            val originalPrice = binding.original
+//
+//            val card = binding.cardView
+//
+//            binding.cardView.setOnClickListener{
+//                clickListener.onClick(product)
+//            }
+//        }
+    }
 }

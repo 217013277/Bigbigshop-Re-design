@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bigbigshopre_design.databinding.CategoryCellBinding
 
 class CategoryAdapter(
-    private val categories: MutableList<CategoryModelClass>,
+    private val categories: MutableList<Category>,
     private val clickListener: CategoryClickListener
     ) : RecyclerView.Adapter<CategoryViewHolder>() {
 
