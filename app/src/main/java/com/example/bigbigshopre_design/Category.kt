@@ -63,8 +63,9 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             //exception
             e.printStackTrace()
         }
-        val firstCategoryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
-        currentCategoryModelClass.categories.addAll(firstCategoryList)
+        populateCategoryList()
+//        val firstCategoryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
+//        currentCategoryModelClass.categories.addAll(firstCategoryList)
 
         try {
             val jsonString = getJSONFromAssets("Products.json")!!
@@ -75,10 +76,10 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
             //exception
             e.printStackTrace()
         }
-
-        currentProductModelClass.products.addAll(
-            initialProductModelClass.products.filter { it.categories.contains("身體護理") }
-        )
+        populateProductList()
+//        currentProductModelClass.products.addAll(
+//            initialProductModelClass.products.filter { it.categories.contains(currentCategory) }
+//        )
 
 //        populateCategories()
 //        populateProducts1()
@@ -105,14 +106,14 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
             productAdapter.notifyDataSetChanged()}
 
-//        binding.productLists.visibility = View.GONE
-
         binding.breadcrumbTv1.setOnClickListener {
             currentCategory = binding.breadcrumbTv1.text.toString()
+            Log.d("currentCategory", currentCategory)
             binding.Header.text = currentCategory
-            currentCategoryModelClass.categories.clear()
-            val temporaryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
-            currentCategoryModelClass.categories.addAll(temporaryList)
+            populateCategoryList()
+
+            populateProductList()
+
 
             binding.Header.text = binding.Header.text
             binding.breadcrumb3.visibility = View.GONE
@@ -350,9 +351,8 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         currentCategory = categoryDataModel.title
         binding.Header.text = currentCategory
         // change category when list item clicked
-        currentCategoryModelClass.categories.clear()
-        val temporaryCategoryList = initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
-        currentCategoryModelClass.categories.addAll(temporaryCategoryList)
+        populateCategoryList()
+        populateProductList()
 
         when(currentCategory) {
             /*"講飲講食" -> {
@@ -398,6 +398,20 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         }
         categoryAdapter.notifyDataSetChanged()
         productAdapter.notifyDataSetChanged()
+    }
+
+    private fun populateCategoryList() {
+        currentCategoryModelClass.categories.clear()
+        val temporaryCategoryList =
+            initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
+        currentCategoryModelClass.categories.addAll(temporaryCategoryList)
+    }
+
+    private fun populateProductList() {
+        currentProductModelClass.products.clear()
+        val tempProductList =
+            initialProductModelClass.products.filter { it.categories.contains((currentCategory)) }
+        currentProductModelClass.products.addAll(tempProductList)
     }
 
     override fun onClick(product: Product) {
