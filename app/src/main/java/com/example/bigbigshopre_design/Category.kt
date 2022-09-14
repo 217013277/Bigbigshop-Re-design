@@ -34,7 +34,9 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var productAdapter: ProductAdapter
 
-    private var categories = Categories(arrayListOf())
+    private var initialCategoryDataClass = CategoryDataClass(arrayListOf())
+    private var categoryDataClass: CategoryDataClass = CategoryDataClass(arrayListOf())
+    private var currentCategory = "商品分類"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +54,21 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         try {
             val jsonString = getJSONFromAssets("Categories.json")!!
             Log.d("categoryList", jsonString)
-            categories = Gson().fromJson(jsonString, Categories::class.java)
+            initialCategoryDataClass = Gson().fromJson(jsonString, CategoryDataClass::class.java)
         } catch (e: JSONException) {
             //exception
             e.printStackTrace()
         }
-        Log.d("categoryList", categories.categoryList[0].title)
+
+        val firstCategoryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
+        categoryDataClass.categories.addAll(firstCategoryList)
 
 //        populateCategories()
         populateProducts1()
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        categoryAdapter = CategoryAdapter(categories.categoryList, this)
+        categoryAdapter = CategoryAdapter(categoryDataClass.categories, this)
         binding.recyclerViewCategory.adapter = categoryAdapter
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
@@ -87,7 +91,13 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         binding.productLists.visibility = View.GONE
 
         binding.breadcrumbTv1.setOnClickListener {
-            binding.Header.text = "商品分類"
+            currentCategory = binding.breadcrumbTv1.text.toString()
+            binding.Header.text = currentCategory
+            categoryDataClass.categories.clear()
+            val temporaryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
+            categoryDataClass.categories.addAll(temporaryList)
+
+            binding.Header.text = binding.Header.text
             binding.breadcrumb3.visibility = View.GONE
             binding.breadcrumb4.visibility = View.GONE
             binding.breadcrumb5.visibility = View.GONE
@@ -319,6 +329,13 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onClick(categoryDataModel: CategoryModelClass) {
+        currentCategory = categoryDataModel.title
+        binding.Header.text = currentCategory
+        // change category when list item clicked
+        categoryDataClass.categories.clear()
+        val temporaryCategoryList = initialCategoryDataClass.categories.filter { it.parent.contains(currentCategory) }
+        categoryDataClass.categories.addAll(temporaryCategoryList)
+
         when(categoryDataModel.title) {
             /*"講飲講食" -> {
                 populateCategories_3_food()
@@ -363,8 +380,6 @@ class Category : Fragment(), CategoryClickListener, ProductClickListener {
         }
         categoryAdapter.notifyDataSetChanged()
         productAdapter.notifyDataSetChanged()
-
-//        binding.Header.text = category.title
     }
 
     override fun onClick(product: Product) {
