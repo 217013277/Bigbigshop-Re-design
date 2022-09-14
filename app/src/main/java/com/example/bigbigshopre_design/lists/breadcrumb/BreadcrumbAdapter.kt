@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bigbigshopre_design.databinding.BreaccrumbTitleCellBinding
 
 class BreadcrumbAdapter (
-    private val breadcrumbObjects: List<BreadcrumbModelClass>,
+    private val breadcrumbObjects: MutableList<BreadcrumbModelClass>,
     private val clickListener: BreadcrumbClickListener
         ) : RecyclerView.Adapter<BreadcrumbAdapter.BreadcrumbViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreadcrumbViewHolder {
         val from = LayoutInflater.from(parent.context)
-        val binding = BreaccrumbTitleCellBinding.inflate(from,parent,false)
+        val binding = BreaccrumbTitleCellBinding.inflate(from, parent,false)
         return BreadcrumbViewHolder(binding)
     }
 
@@ -24,7 +24,7 @@ class BreadcrumbAdapter (
         holder.name.setOnClickListener { clickListener.onClick(objects) }
     }
 
-    override fun getItemCount(): Int = breadcrumbList.size
+    override fun getItemCount(): Int = breadcrumbObjects.size
 
     class BreadcrumbViewHolder (
         binding: BreaccrumbTitleCellBinding

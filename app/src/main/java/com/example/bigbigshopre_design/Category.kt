@@ -67,7 +67,6 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         breadcrumbList.add(BreadcrumbModelClass("cde"))
         breadcrumbList.add(BreadcrumbModelClass("efg"))
 
-        binding.recyclerViewBreadcrumb.setHasFixedSize(true)
         binding.recyclerViewBreadcrumb.layoutManager = LinearLayoutManager(activity?.applicationContext , LinearLayoutManager.HORIZONTAL, false)
         breadcrumbAdapter = BreadcrumbAdapter(breadcrumbList, this)
         binding.recyclerViewBreadcrumb.adapter = breadcrumbAdapter
