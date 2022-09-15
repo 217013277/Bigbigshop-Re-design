@@ -238,12 +238,12 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
     private fun filter(text: String) {
         // creating a new array list to filter our data.
         val searchedProducts: ArrayList<Product> = ArrayList()
-
+        val tempProductList =
+            initialProductModelClass.products.filter { it.categories.contains((currentCategory)) }
         // running a for loop to compare elements.
-        for (item in currentProductModelClass.products) {
+        for (item in tempProductList) {
             // checking if the entered string matched with any item of our recycler view.
             if (item.brand.lowercase().contains(text.lowercase()) ||
-
                 item.name.lowercase().contains(text.lowercase())
             ) {
                 // if the item is matched we are
