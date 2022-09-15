@@ -19,8 +19,7 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-//        holder.bindProduct(products[position])
-        val listPosition = position
+//        val listPosition = position
         val product = products[position]
 
         val path = context.resources.getIdentifier(product.image,"drawable",context.packageName)
@@ -52,22 +51,4 @@ class ProductAdapter(
 
     }
 
-//    fun searchList(currentArrayList: ArrayList<Product>) {
-//        // below line is to add our filtered
-//        // list in our course array list.
-//        products = currentArrayList
-//        // below line is to notify our adapter
-//        // as change in recycler view data.
-//        notifyDataSetChanged()
-//    }
-//
-//    fun quitSearch(currentArrayList: ArrayList<Product>) {
-//
-//        // below line is to add our filtered
-//        // list in our course array list.
-//        products = currentArrayList
-//        // below line is to notify our adapter
-//        // as change in recycler view data.
-//        notifyDataSetChanged()
-//    }
 }
