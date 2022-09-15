@@ -44,12 +44,6 @@ class Home : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.button.setOnClickListener {
-            val fragmentManager = fragmentManager
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.frame_layout,Category())?.commit()
-        }
-
         return view
     }
 
