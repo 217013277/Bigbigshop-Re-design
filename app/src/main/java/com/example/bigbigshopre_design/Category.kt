@@ -111,12 +111,18 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
     }
 
     override fun onClick(breadcrumbModelClass: BreadcrumbModelClass) {
-        Log.d("breadcrumbClicked", breadcrumbModelClass.name)
         currentCategory = breadcrumbModelClass.name
-        breadcrumbList.subList(breadcrumbModelClass.id!!+1, breadcrumbList.size).clear()
-//        breadcrumbList.removeAt(breadcrumbModelClass.id!!)
-        Log.d("breadcrumbList", breadcrumbList.toString())
-        breadcrumbAdapter.notifyItemRangeRemoved(breadcrumbModelClass.id+1, breadcrumbList.size)
+        val clickId = breadcrumbModelClass.id!!
+        val size = breadcrumbList.size
+        Log.d("clickedId", clickId.toString())
+        if (clickId != breadcrumbList.size) {
+            breadcrumbList.subList(clickId+1, breadcrumbList.size).clear()
+            breadcrumbAdapter.notifyItemRangeRemoved(clickId+1,size - clickId )
+        } else {
+            breadcrumbList.removeAt(clickId)
+            breadcrumbAdapter.notifyItemRemoved(clickId)
+        }
+
         populateCategoryList()
         categoryAdapter.notifyDataSetChanged()
         populateProductList()
