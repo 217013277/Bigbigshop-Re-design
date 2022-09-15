@@ -19,7 +19,9 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="商品分類"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_play_arrow_24"
+            app:drawableTint="@color/orange_main" />
 
     </androidx.cardview.widget.CardView>
 

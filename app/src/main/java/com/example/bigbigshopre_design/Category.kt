@@ -60,12 +60,9 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.productLists.visibility = View.GONE
+//        binding.productLists.visibility = View.GONE
 
-        breadcrumbList.add(BreadcrumbModelClass(currentCategory))
-
-        breadcrumbList.add(BreadcrumbModelClass("cde"))
-        breadcrumbList.add(BreadcrumbModelClass("efg"))
+        initBreadcrumbList()
 
         binding.recyclerViewBreadcrumb.layoutManager = LinearLayoutManager(activity?.applicationContext , LinearLayoutManager.HORIZONTAL, false)
         breadcrumbAdapter = BreadcrumbAdapter(breadcrumbList, this)
@@ -111,63 +108,31 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
 
             productAdapter.notifyDataSetChanged()}
 
-//        binding.breadcrumbTv1.setOnClickListener {
-//            currentCategory = binding.breadcrumbTv1.text.toString()
-//            binding.Header.text = currentCategory
-//            populateCategoryList()
-//
-//            populateProductList()
-//
-//
-//            binding.Header.text = binding.Header.text
-//            binding.breadcrumb3.visibility = View.GONE
-//            binding.breadcrumb4.visibility = View.GONE
-//            binding.breadcrumb5.visibility = View.GONE
-//            binding.breadcrumb6.visibility = View.GONE
-//            binding.breadcrumb7.visibility = View.GONE
-//            categoryAdapter.notifyDataSetChanged()
-//            binding.productLists.visibility = View.GONE
-//        }
-//
-//        binding.breadcrumbTv3.setOnClickListener {
-//            binding.Header.text = "個人護理"
-//            binding.breadcrumb4.visibility = View.GONE
-//            binding.breadcrumb5.visibility = View.GONE
-//            binding.breadcrumb6.visibility = View.GONE
-//            binding.breadcrumb7.visibility = View.GONE
-//
-//            categoryAdapter.notifyDataSetChanged()
-//            productAdapter.notifyDataSetChanged()
-//            binding.productLists.visibility = View.VISIBLE
-//        }
-//
-//        binding.breadcrumbTv4.setOnClickListener {
-//            binding.Header.text = "身體護理"
-//            binding.breadcrumb5.visibility = View.GONE
-//            binding.breadcrumb6.visibility = View.GONE
-//            binding.breadcrumb7.visibility = View.GONE
-//            categoryAdapter.notifyDataSetChanged()
-//            productAdapter.notifyDataSetChanged()
-//            binding.productLists.visibility = View.VISIBLE
-//        }
-//
-//        binding.breadcrumbTv5.setOnClickListener {
-//            binding.Header.text = "口罩及配件"
-//            binding.breadcrumb6.visibility = View.GONE
-//            binding.breadcrumb7.visibility = View.GONE
-//            categoryAdapter.notifyDataSetChanged()
-//            productAdapter.notifyDataSetChanged()
-//            binding.productLists.visibility = View.VISIBLE
-//        }
-
         return view
     }
 
     override fun onClick(breadcrumbModelClass: BreadcrumbModelClass) {
         Log.d("breadcrumbClicked", breadcrumbModelClass.name)
-        breadcrumbList.removeAt(breadcrumbModelClass.id!!)
+        currentCategory = breadcrumbModelClass.name
+        breadcrumbList.subList(breadcrumbModelClass.id!!+1, breadcrumbList.size).clear()
+//        breadcrumbList.removeAt(breadcrumbModelClass.id!!)
         Log.d("breadcrumbList", breadcrumbList.toString())
-        breadcrumbAdapter.notifyDataSetChanged()
+        breadcrumbAdapter.notifyItemRangeRemoved(breadcrumbModelClass.id+1, breadcrumbList.size)
+        populateCategoryList()
+        categoryAdapter.notifyDataSetChanged()
+        populateProductList()
+        productAdapter.notifyDataSetChanged()
+    }
+
+    private fun initBreadcrumbList() {
+        breadcrumbList.clear()
+        breadcrumbList.add(BreadcrumbModelClass(currentCategory))
+    }
+
+    private fun addBreadcrumbList(s: String) {
+        breadcrumbList.add(BreadcrumbModelClass(s))
+        breadcrumbAdapter.notifyItemInserted(breadcrumbList.size -1)
+        binding.recyclerViewBreadcrumb.scrollToPosition(breadcrumbAdapter.itemCount-1)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -178,27 +143,10 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         populateCategoryList()
         populateProductList()
 
-//        when(currentCategory) {
-//            "個人護理" -> {
-//                binding.breadcrumb3.visibility = View.VISIBLE
-//                binding.productLists.visibility = View.VISIBLE
-//            }
-//            "身體護理" -> {
-//                binding.breadcrumb4.visibility = View.VISIBLE
-//                binding.productLists.visibility = View.VISIBLE
-//            }
-//            "口罩及配件" -> {
-//                binding.breadcrumb5.visibility = View.VISIBLE
-//                binding.productLists.visibility = View.VISIBLE
-//            }
-//            "成人口罩" -> {
-//                binding.breadcrumb6.visibility = View.VISIBLE
-//                binding.productLists.visibility = View.VISIBLE
-//            }
-//            else -> Log.i(TAG,"nothing select")
-//        }
         categoryAdapter.notifyDataSetChanged()
         productAdapter.notifyDataSetChanged()
+
+        addBreadcrumbList(currentCategory)
     }
 
     private fun populateCategoryList() {
