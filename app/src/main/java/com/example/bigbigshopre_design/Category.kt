@@ -99,10 +99,10 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         var sortOrder = false
         binding.btnSort.setOnClickListener {
             if (!sortOrder) {
-                currentProductModelClass.products.sortBy { it.name }
+                currentProductModelClass.products.sortBy { it.salesPrice }
                 sortOrder = true
             } else {
-                currentProductModelClass.products.sortByDescending { it.name }
+                currentProductModelClass.products.sortByDescending { it.salesPrice }
                 sortOrder = false
             }
 
