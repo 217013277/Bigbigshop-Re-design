@@ -26,6 +26,7 @@ class ProductAdapter(
         val path = context.resources.getIdentifier(product.image,"drawable",context.packageName)
 
         holder.image.setImageResource(path)
+        holder.image.contentDescription = product.name
         holder.brand.text = product.brand
         holder.name.text = product.name
         holder.salesPrice.text = product.salesPrice.toString()
