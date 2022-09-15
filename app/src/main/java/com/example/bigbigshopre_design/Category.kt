@@ -1,11 +1,11 @@
 package com.example.bigbigshopre_design
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -197,6 +197,7 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         inflater.inflate(R.menu.search_menu,menu)
         val menuItem = menu.findItem(R.id.actionSearch)
         val searchView = menuItem.actionView as SearchView
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -220,7 +221,7 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         val searchResultArrayList: ArrayList<Product> = ArrayList()
 
         // running a for loop to compare elements.
-        for (item in initialProductModelClass.products) {
+        for (item in currentProductModelClass.products) {
             // checking if the entered string matched with any item of our recycler view.
             if (item.brand.lowercase().contains(text.lowercase()) ||
                 item.name.lowercase().contains(text.lowercase())
@@ -237,7 +238,11 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         } else {
             // at last we are passing that filtered
             // list to our adapter class.
-            productAdapter.searchList(searchResultArrayList)
+//            productAdapter.searchList(searchResultArrayList)
+
+            currentProductModelClass.products.clear()
+            currentProductModelClass.products.addAll(searchResultArrayList)
+            productAdapter.notifyDataSetChanged()
         }
 
     }

@@ -52,13 +52,22 @@ class ProductAdapter(
 
     }
 
-    fun searchList(searchResultArrayList: ArrayList<Product>) {
-        // below line is to add our filtered
-        // list in our course array list.
-        products = searchResultArrayList
-        // below line is to notify our adapter
-        // as change in recycler view data.
-
-        notifyDataSetChanged()
-    }
+//    fun searchList(currentArrayList: ArrayList<Product>) {
+//        // below line is to add our filtered
+//        // list in our course array list.
+//        products = currentArrayList
+//        // below line is to notify our adapter
+//        // as change in recycler view data.
+//        notifyDataSetChanged()
+//    }
+//
+//    fun quitSearch(currentArrayList: ArrayList<Product>) {
+//
+//        // below line is to add our filtered
+//        // list in our course array list.
+//        products = currentArrayList
+//        // below line is to notify our adapter
+//        // as change in recycler view data.
+//        notifyDataSetChanged()
+//    }
 }
