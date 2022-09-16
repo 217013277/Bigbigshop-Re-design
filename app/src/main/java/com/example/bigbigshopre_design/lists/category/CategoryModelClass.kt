@@ -1,9 +1,12 @@
 package com.example.bigbigshopre_design.lists.category
 
+import com.google.gson.annotations.SerializedName
+
 //val CATEGORY_ID_EXTRA = "categoryExtra"
 
 data class CategoryModelClass(
-    var categories: ArrayList<Category>
+    @SerializedName("categories")
+    var categoryList: ArrayList<Category>
 )
 
 data class Category (

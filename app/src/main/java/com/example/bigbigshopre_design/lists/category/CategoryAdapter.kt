@@ -8,7 +8,7 @@ import com.example.bigbigshopre_design.databinding.CategoryCellBinding
 class CategoryAdapter(
     private val categories: MutableList<Category>,
     private val clickListener: CategoryClickListener
-    ) : RecyclerView.Adapter<CategoryViewHolder>() {
+    ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val from = LayoutInflater.from(parent.context)
@@ -21,4 +21,17 @@ class CategoryAdapter(
     }
 
     override fun getItemCount(): Int = categories.size
+
+    class CategoryViewHolder(
+        private val categoryCellBinding: CategoryCellBinding,
+        private val clickListener: CategoryClickListener
+    ): RecyclerView.ViewHolder(categoryCellBinding.root) {
+        fun bindCategory(categoryDataModel: Category) {
+            categoryCellBinding.categoryTitle.text = categoryDataModel.title
+
+            categoryCellBinding.categoryCardView.setOnClickListener{
+                clickListener.onClick(categoryDataModel)
+            }
+        }
+    }
 }

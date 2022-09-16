@@ -1,11 +1,14 @@
 package com.example.bigbigshopre_design.lists.product
 
+import com.google.gson.annotations.SerializedName
+
 //var productList = mutableListOf<Product>()
 
 val PRODUCT_ID_EXTRA = "productExtra"
 
 data class ProductModelClass(
-    var products: ArrayList<Product>
+    @SerializedName("products")
+    var productList: ArrayList<Product>
 )
 
 data class Product (

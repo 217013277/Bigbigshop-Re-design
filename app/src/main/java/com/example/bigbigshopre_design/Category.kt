@@ -87,21 +87,21 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
 
         binding.recyclerViewCategory.isNestedScrollingEnabled = false
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        categoryAdapter = CategoryAdapter(currentCategoryModelClass.categories, this)
+        categoryAdapter = CategoryAdapter(currentCategoryModelClass.categoryList, this)
         binding.recyclerViewCategory.adapter = categoryAdapter
 
         binding.recycleViewProduct.isNestedScrollingEnabled = false
         binding.recycleViewProduct.layoutManager = GridLayoutManager(activity?.applicationContext , 2)
-        productAdapter = ProductAdapter(requireActivity().applicationContext, currentProductModelClass.products, this)
+        productAdapter = ProductAdapter(requireActivity().applicationContext, currentProductModelClass.productList, this)
         binding.recycleViewProduct.adapter = productAdapter
 
         var sortOrder = false
         binding.btnSort.setOnClickListener {
             if (!sortOrder) {
-                currentProductModelClass.products.sortBy { it.salesPrice }
+                currentProductModelClass.productList.sortBy { it.salesPrice }
                 sortOrder = true
             } else {
-                currentProductModelClass.products.sortByDescending { it.salesPrice }
+                currentProductModelClass.productList.sortByDescending { it.salesPrice }
                 sortOrder = false
             }
 
@@ -155,17 +155,17 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
     }
 
     private fun populateCategoryList() {
-        currentCategoryModelClass.categories.clear()
+        currentCategoryModelClass.categoryList.clear()
         val temporaryCategoryList =
-            initialCategoryModelClass.categories.filter { it.parent.contains(currentCategory) }
-        currentCategoryModelClass.categories.addAll(temporaryCategoryList)
+            initialCategoryModelClass.categoryList.filter { it.parent.contains(currentCategory) }
+        currentCategoryModelClass.categoryList.addAll(temporaryCategoryList)
     }
 
     private fun populateProductList() {
-        currentProductModelClass.products.clear()
+        currentProductModelClass.productList.clear()
         val tempProductList =
-            initialProductModelClass.products.filter { it.categories.contains((currentCategory)) }
-        currentProductModelClass.products.addAll(tempProductList)
+            initialProductModelClass.productList.filter { it.categories.contains((currentCategory)) }
+        currentProductModelClass.productList.addAll(tempProductList)
     }
 
     override fun onClick(product: Product) {
@@ -239,7 +239,7 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
         // creating a new array list to filter our data.
         val searchedProducts: ArrayList<Product> = ArrayList()
         val tempProductList =
-            initialProductModelClass.products.filter { it.categories.contains((currentCategory)) }
+            initialProductModelClass.productList.filter { it.categories.contains((currentCategory)) }
         // running a for loop to compare elements.
         for (item in tempProductList) {
             // checking if the entered string matched with any item of our recycler view.
@@ -260,8 +260,8 @@ class Category : Fragment(), BreadcrumbClickListener, CategoryClickListener, Pro
             // list to our adapter class.
 //            productAdapter.updateList(searchedProducts)
 
-            currentProductModelClass.products.clear()
-            currentProductModelClass.products.addAll(searchedProducts)
+            currentProductModelClass.productList.clear()
+            currentProductModelClass.productList.addAll(searchedProducts)
             productAdapter.notifyDataSetChanged()
         }
 
